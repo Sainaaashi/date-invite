@@ -542,7 +542,7 @@
       <button class="btn-yes" id="btnYes" onclick="sayYes()">Yes, of course ♪</button>
  
       <div id="rsvpZone">
-        <button class="btn-no" id="btnNo" onmouseenter="runAway()" ontouchstart="runAway()">No, maybe not</button>
+        <button class="btn-no" id="btnNo">No, maybe not</button>
       </div>
       <div class="no-msg" id="noMsg"></div>
     </div>
@@ -711,6 +711,7 @@
     setTimeout(() => { moving = false; }, 360);
   }
  
+  btn.addEventListener('mouseenter', runAway);
   btn.addEventListener('touchstart', e => { e.preventDefault(); runAway(); }, { passive:false });
  
   /* YES */
@@ -771,7 +772,7 @@
   try { emailjs.init({ publicKey: EJS_KEY }); } catch(e) {}
  
   function sendNotification(choice, venue) {
-    if (EJS_KEY === 'YOUR_PUBLIC_KEY') return; // not configured yet
+    if (!EJS_KEY || !EJS_SERVICE || !EJS_TEMPLATE) return; // keys not set
     const params = {
       choice:  choice === 'wine' ? 'Classic Wine Date 🍷' : 'Vinyl Date 🎵',
       venue:   venue,
