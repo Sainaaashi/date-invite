@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>An Invitation</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=EB+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
@@ -360,8 +361,26 @@
   <div class="card">
     <!-- Adrian Planet scene -->
     <div class="adrian-scene" aria-hidden="true">
-      <svg class="adrian-svg" viewBox="0 0 420 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <svg class="adrian-svg" viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
         <defs>
+          <!-- Astrophage nebula turbulence colors -->
+          <radialGradient id="nebCore" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#ff6a00" stop-opacity="0.55"/>
+            <stop offset="40%"  stop-color="#c84b00" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="nebGreen" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#22ff88" stop-opacity="0.35"/>
+            <stop offset="50%"  stop-color="#00cc55" stop-opacity="0.18"/>
+            <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="turbulence" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence type="turbulence" baseFrequency="0.018 0.025" numOctaves="4" seed="7" result="turb"/>
+            <feDisplacementMap in="SourceGraphic" in2="turb" scale="18" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+          <filter id="softBlur">
+            <feGaussianBlur stdDeviation="2.5"/>
+          </filter>
           <!-- Adrian planet gradient — rust/amber/deep red -->
           <radialGradient id="adrianGrad" cx="38%" cy="35%" r="58%">
             <stop offset="0%"   stop-color="#f0a060"/>
@@ -387,13 +406,24 @@
             <stop offset="100%" stop-color="#0d0810"/>
           </linearGradient>
           <clipPath id="sceneClip">
-            <rect width="420" height="90" rx="3"/>
+            <rect width="420" height="140" rx="3"/>
           </clipPath>
         </defs>
  
         <g clip-path="url(#sceneClip)">
           <!-- deep space background -->
-          <rect width="420" height="90" fill="url(#spaceBg)"/>
+          <rect width="420" height="140" fill="url(#spaceBg)"/>
+ 
+          <!-- ══ ASTROPHAGE NEBULA — swirling green/orange below horizon ══ -->
+          <!-- base orange fire layer -->
+          <ellipse cx="210" cy="118" rx="230" ry="58" fill="url(#nebCore)" filter="url(#turbulence)"/>
+          <ellipse cx="180" cy="125" rx="180" ry="45" fill="#c84b00" opacity="0.18" filter="url(#softBlur)"/>
+          <ellipse cx="240" cy="130" rx="150" ry="38" fill="#ff6600" opacity="0.12" filter="url(#softBlur)"/>
+          <!-- green Astrophage glow layer -->
+          <ellipse cx="200" cy="122" rx="200" ry="52" fill="url(#nebGreen)" filter="url(#turbulence)"/>
+          <ellipse cx="260" cy="128" rx="140" ry="40" fill="#00ff66" opacity="0.08" filter="url(#softBlur)"/>
+          <!-- top edge fade of nebula into space -->
+          <rect x="0" y="90" width="420" height="50" fill="url(#spaceBg)" opacity="0.55"/>
  
           <!-- tiny background stars -->
           <circle cx="12"  cy="8"  r="0.5" fill="rgba(255,240,200,0.7)"/>
@@ -421,29 +451,29 @@
           <circle cx="410" cy="75" r="0.4" fill="rgba(200,220,255,0.5)"/>
  
           <!-- Ryland (the star) — top left, warm sun glow -->
-          <circle cx="28" cy="28" r="22" fill="url(#sunGrad)" opacity="0.5"/>
-          <circle cx="28" cy="28" r="10" fill="url(#sunGrad)" opacity="0.6"/>
-          <circle cx="28" cy="28" r="4"  fill="#fff8e0" opacity="0.95"/>
+          <circle cx="32" cy="38" r="26" fill="url(#sunGrad)" opacity="0.5"/>
+          <circle cx="32" cy="38" r="12" fill="url(#sunGrad)" opacity="0.6"/>
+          <circle cx="32" cy="38" r="5"  fill="#fff8e0" opacity="0.95"/>
  
           <!-- Astrophage belt — faint golden line near Ryland -->
-          <ellipse cx="28" cy="28" rx="18" ry="5" fill="none" stroke="rgba(255,210,80,0.12)" stroke-width="1.5"/>
+          <ellipse cx="32" cy="38" rx="20" ry="6" fill="none" stroke="rgba(255,210,80,0.15)" stroke-width="1.5"/>
  
           <!-- Adrian planet — large, right side, partially cropped for drama -->
-          <!-- atmosphere halo -->
-          <circle cx="340" cy="45" r="54" fill="url(#atmGrad)"/>
+          <!-- atmosphere halo — pick up nebula green glow on lower rim -->
+          <circle cx="350" cy="55" r="62" fill="url(#atmGrad)"/>
           <!-- planet body -->
-          <circle cx="340" cy="45" r="44" fill="url(#adrianGrad)"/>
+          <circle cx="350" cy="55" r="50" fill="url(#adrianGrad)"/>
           <!-- surface bands / terrain detail -->
-          <ellipse cx="340" cy="30" rx="44" ry="8"  fill="rgba(180,70,20,0.25)" transform="rotate(-8,340,30)"/>
-          <ellipse cx="340" cy="48" rx="40" ry="6"  fill="rgba(100,30,5,0.20)"  transform="rotate(5,340,48)"/>
-          <ellipse cx="340" cy="60" rx="38" ry="5"  fill="rgba(220,100,40,0.15)" transform="rotate(-3,340,60)"/>
-          <!-- terminator shadow -->
-          <circle cx="340" cy="45" r="44" fill="rgba(10,4,2,0.38)" clip-path="url(#termClip)"/>
+          <ellipse cx="350" cy="38" rx="50" ry="9"  fill="rgba(180,70,20,0.25)" transform="rotate(-8,350,38)"/>
+          <ellipse cx="350" cy="58" rx="46" ry="7"  fill="rgba(100,30,5,0.20)"  transform="rotate(5,350,58)"/>
+          <ellipse cx="350" cy="72" rx="44" ry="6"  fill="rgba(220,100,40,0.15)" transform="rotate(-3,350,72)"/>
+          <!-- nebula green rim on lower planet edge -->
+          <circle cx="350" cy="55" r="50" fill="none" stroke="rgba(30,255,100,0.12)" stroke-width="4"/>
           <!-- rim light — warm orange from Ryland -->
-          <circle cx="340" cy="45" r="44" fill="none" stroke="rgba(240,150,60,0.35)" stroke-width="2.5"/>
+          <circle cx="350" cy="55" r="50" fill="none" stroke="rgba(240,150,60,0.32)" stroke-width="2.5"/>
  
           <!-- Rocky (Adrian) — tiny multi-ring being, near planet -->
-          <g transform="translate(262,38)">
+          <g transform="translate(268,48)">
             <circle r="7"   fill="none" stroke="rgba(184,132,58,0.55)" stroke-width="0.7"/>
             <circle r="4.5" fill="none" stroke="rgba(184,132,58,0.40)" stroke-width="0.6"/>
             <circle r="2"   fill="rgba(255,200,50,0.7)"/>
@@ -454,7 +484,7 @@
           </g>
  
           <!-- Hail Mary ship — tiny silhouette between Ryland and Adrian -->
-          <g transform="translate(138,36)" opacity="0.65">
+          <g transform="translate(138,46)" opacity="0.65">
             <ellipse rx="9" ry="2.5" fill="rgba(200,210,220,0.6)"/>
             <ellipse rx="4" ry="1.5" cy="-1.5" fill="rgba(180,190,200,0.5)"/>
             <line x1="-9" y1="0" x2="-15" y2="2" stroke="rgba(180,190,200,0.4)" stroke-width="0.7"/>
@@ -464,11 +494,13 @@
           </g>
  
           <!-- label: Adrian -->
-          <text x="310" y="86" font-family="Georgia,serif" font-style="italic" font-size="7.5" fill="rgba(220,130,70,0.55)" letter-spacing="1.5">Adrian</text>
+          <text x="300" y="108" font-family="Georgia,serif" font-style="italic" font-size="8" fill="rgba(220,130,70,0.6)" letter-spacing="1.5">Adrian</text>
           <!-- label: Rocky -->
-          <text x="253" y="55" font-family="Georgia,serif" font-style="italic" font-size="6.5" fill="rgba(184,150,58,0.5)" letter-spacing="1">Rocky</text>
+          <text x="252" y="66" font-family="Georgia,serif" font-style="italic" font-size="6.5" fill="rgba(184,150,58,0.55)" letter-spacing="1">Rocky</text>
           <!-- label: Ryland -->
-          <text x="6" y="58" font-family="Georgia,serif" font-style="italic" font-size="6.5" fill="rgba(255,230,140,0.45)" letter-spacing="1">Ryland ★</text>
+          <text x="6" y="72" font-family="Georgia,serif" font-style="italic" font-size="6.5" fill="rgba(255,230,140,0.5)" letter-spacing="1">Ryland ★</text>
+          <!-- Astrophage label -->
+          <text x="140" y="136" font-family="Georgia,serif" font-style="italic" font-size="6.5" fill="rgba(80,255,140,0.4)" letter-spacing="1.5">~ Astrophage ~</text>
         </g>
       </svg>
     </div>
@@ -723,6 +755,35 @@
   `;
   document.head.appendChild(ds);
  
+  /* ══ EMAILJS NOTIFICATION ══
+     Setup steps (free, 2 min):
+     1. Go to https://www.emailjs.com → Sign up free
+     2. Add Email Service → Gmail → copy YOUR_SERVICE_ID
+     3. Create Email Template with variables: {{choice}}, {{venue}}, {{time}}
+        Copy YOUR_TEMPLATE_ID
+     4. Go to Account → API Keys → copy YOUR_PUBLIC_KEY
+     5. Replace the three placeholders below
+  */
+  const EJS_SERVICE  = https://sainaaashi.github.io/date-invite/;
+  const EJS_TEMPLATE = template_3845ct7;
+  const EJS_KEY      = YxejwbRVXGq64iacd;
+ 
+  try { emailjs.init({ publicKey: EJS_KEY }); } catch(e) {}
+ 
+  function sendNotification(choice, venue) {
+    if (EJS_KEY === 'YOUR_PUBLIC_KEY') return; // not configured yet
+    const params = {
+      choice:  choice === 'wine' ? 'Classic Wine Date 🍷' : 'Vinyl Date 🎵',
+      venue:   venue,
+      time:    new Date().toLocaleString('en-US', { dateStyle:'full', timeStyle:'short' })
+    };
+    try {
+      emailjs.send(EJS_SERVICE, EJS_TEMPLATE, params)
+        .then(() => console.log('✅ Notification sent'))
+        .catch(e => console.warn('EmailJS error:', e));
+    } catch(e) {}
+  }
+ 
   /* PLANS */
   const plans = {
     wine: {
@@ -754,6 +815,7 @@
     document.getElementById('acceptedScreen').classList.remove('show');
     document.getElementById('acceptedScreen').style.display = 'none';
     localStorage.setItem('dateInviteChoice', type);
+    sendNotification(type, p.venue);
     setTimeout(() => { document.getElementById('chosenScreen').classList.add('show'); spawnNotes(); }, 100);
   }
 </script>
