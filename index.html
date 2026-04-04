@@ -261,6 +261,29 @@
     font-size:10px; letter-spacing:0.24em; text-transform:uppercase;
     padding:7px 18px; transform:rotate(-1.5deg); margin-top:4px;
   }
+ 
+  /* LOCKED SCREEN */
+  .locked-screen {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+    animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .locked-screen.show { display: block; }
+  .locked-icon { font-size: 36px; margin-bottom: 16px; }
+  .locked-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--rose);
+    margin-bottom: 10px;
+  }
+  .locked-sub {
+    font-size: 14.5px;
+    color: var(--dust);
+    font-style: italic;
+    line-height: 1.9;
+  }
 </style>
 </head>
 <body>
@@ -353,6 +376,18 @@
  
       <div class="divider"><div class="divider-line"></div><div class="divider-glyph">◈</div><div class="divider-line"></div></div>
       <div class="stamp">It's a date ✦</div>
+    <!-- LOCKED SCREEN -->
+    <div class="locked-screen" id="lockedScreen">
+      <div class="locked-icon">🔒</div>
+      <div class="locked-title">You've already answered</div>
+      <div class="locked-sub">
+        Your choice has been received.<br>
+        Some answers only need to be given once. ♪
+      </div>
+      <div class="divider" style="margin-top:24px;"><div class="divider-line"></div><div class="divider-glyph">◈</div><div class="divider-line"></div></div>
+      <div class="stamp">It's a date ✦</div>
+    </div>
+ 
     </div>
   </div>
 </div>
@@ -371,6 +406,16 @@
     el.style.fontSize = (10 + Math.random() * 11) + 'px';
     pc.appendChild(el);
   }
+ 
+  /* ONE-TIME LOCK — check on load */
+  (function() {
+    const saved = localStorage.getItem('dateInviteChoice');
+    if (saved) {
+      document.getElementById('inviteScreen').style.display = 'none';
+      const ls = document.getElementById('lockedScreen');
+      ls.classList.add('show');
+    }
+  })();
  
   /* NO BUTTON */
   let noCount = 0;
@@ -488,6 +533,7 @@
     document.getElementById('chosenMapLink').href = p.mapUrl;
     document.getElementById('acceptedScreen').classList.remove('show');
     document.getElementById('acceptedScreen').style.display = 'none';
+    localStorage.setItem('dateInviteChoice', type);
     setTimeout(() => { document.getElementById('chosenScreen').classList.add('show'); spawnNotes(); }, 100);
   }
 </script>
