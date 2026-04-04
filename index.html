@@ -34,10 +34,66 @@
     content:'';
     position:fixed; inset:0;
     background:
-      radial-gradient(ellipse at 20% 25%, rgba(155,58,82,0.22) 0%, transparent 55%),
-      radial-gradient(ellipse at 82% 75%, rgba(184,132,58,0.15) 0%, transparent 55%),
-      radial-gradient(ellipse at 55% 50%, rgba(10,6,2,0.5) 0%, transparent 80%);
+      radial-gradient(ellipse at 18% 22%, rgba(155,58,82,0.18) 0%, transparent 48%),
+      radial-gradient(ellipse at 80% 72%, rgba(184,132,58,0.12) 0%, transparent 48%),
+      radial-gradient(ellipse at 60% 20%, rgba(52,120,140,0.10) 0%, transparent 40%),
+      radial-gradient(ellipse at 30% 80%, rgba(80,60,140,0.08) 0%, transparent 38%),
+      radial-gradient(ellipse at 50% 50%, rgba(6,4,10,0.55) 0%, transparent 80%);
     z-index:0; pointer-events:none;
+  }
+ 
+  /* STARFIELD */
+  #starfield { position:fixed; inset:0; pointer-events:none; z-index:0; }
+ 
+  /* PHM QUOTE strip above card */
+  .phm-quote {
+    text-align:center;
+    margin-bottom:18px;
+    opacity:0;
+    animation: fadeUp 1.2s 0.5s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+  .phm-quote-text {
+    font-family:'EB Garamond',serif;
+    font-size:12px;
+    font-style:italic;
+    letter-spacing:0.14em;
+    color:rgba(184,132,58,0.55);
+  }
+  .phm-quote-attr {
+    font-size:10px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:rgba(184,132,58,0.3);
+    margin-top:3px;
+  }
+ 
+  /* Adrian planet scene */
+  .adrian-scene {
+    width: 100%;
+    margin: 0 0 0 0;
+    overflow: hidden;
+    display: block;
+  }
+  .adrian-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+ 
+  /* Astrophage glow dot on card */
+  .astrophage {
+    display:inline-block;
+    width:7px; height:7px;
+    border-radius:50%;
+    background: radial-gradient(circle, #ffe066 0%, #ffaa00 60%, transparent 100%);
+    box-shadow: 0 0 6px 2px rgba(255,200,50,0.5);
+    animation: astrophagePulse 3s ease-in-out infinite;
+    vertical-align:middle;
+    margin: 0 5px;
+  }
+  @keyframes astrophagePulse {
+    0%,100% { box-shadow:0 0 5px 2px rgba(255,200,50,0.4); transform:scale(1); }
+    50%      { box-shadow:0 0 12px 5px rgba(255,200,50,0.7); transform:scale(1.25); }
   }
  
   .particles { position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden; }
@@ -64,14 +120,18 @@
   .card {
     background:var(--card);
     max-width:500px; width:100%;
-    padding:52px 48px 44px;
+    padding:0 0 44px 0;
     position:relative;
+    overflow:hidden;
     box-shadow:
       0 0 0 1px rgba(184,132,58,0.22),
       0 0 0 5px rgba(155,58,82,0.06),
       0 36px 90px rgba(0,0,0,0.62),
       0 4px 18px rgba(0,0,0,0.28);
     animation:cardRise 1s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .card-body {
+    padding: 32px 48px 0;
   }
   @keyframes cardRise {
     from { opacity:0; transform:translateY(38px) scale(0.97); }
@@ -288,18 +348,142 @@
 </head>
 <body>
  
+<canvas id="starfield"></canvas>
 <div class="particles" id="particles"></div>
  
 <div class="page">
+  <div style="max-width:500px;width:100%;">
+    <div class="phm-quote">
+      <div class="phm-quote-text">"Two beings. Two worlds. One impossible friendship."</div>
+      <div class="phm-quote-attr">— Project Hail Mary</div>
+    </div>
   <div class="card">
-    <span class="orn tl">✦</span>
-    <span class="orn tr">✦</span>
-    <span class="orn bl">✦</span>
-    <span class="orn br">✦</span>
+    <!-- Adrian Planet scene -->
+    <div class="adrian-scene" aria-hidden="true">
+      <svg class="adrian-svg" viewBox="0 0 420 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <!-- Adrian planet gradient — rust/amber/deep red -->
+          <radialGradient id="adrianGrad" cx="38%" cy="35%" r="58%">
+            <stop offset="0%"   stop-color="#f0a060"/>
+            <stop offset="30%"  stop-color="#c85a28"/>
+            <stop offset="65%"  stop-color="#8c2a10"/>
+            <stop offset="100%" stop-color="#3a0e04"/>
+          </radialGradient>
+          <!-- atmosphere glow -->
+          <radialGradient id="atmGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="70%"  stop-color="transparent"/>
+            <stop offset="88%"  stop-color="rgba(220,120,50,0.18)"/>
+            <stop offset="100%" stop-color="rgba(220,120,50,0)"/>
+          </radialGradient>
+          <!-- Ryland star glow -->
+          <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#fff8e0"/>
+            <stop offset="40%"  stop-color="#ffe090"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </radialGradient>
+          <!-- space bg -->
+          <linearGradient id="spaceBg" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"   stop-color="#08050f"/>
+            <stop offset="100%" stop-color="#0d0810"/>
+          </linearGradient>
+          <clipPath id="sceneClip">
+            <rect width="420" height="90" rx="3"/>
+          </clipPath>
+        </defs>
+ 
+        <g clip-path="url(#sceneClip)">
+          <!-- deep space background -->
+          <rect width="420" height="90" fill="url(#spaceBg)"/>
+ 
+          <!-- tiny background stars -->
+          <circle cx="12"  cy="8"  r="0.5" fill="rgba(255,240,200,0.7)"/>
+          <circle cx="38"  cy="18" r="0.4" fill="rgba(200,220,255,0.6)"/>
+          <circle cx="65"  cy="5"  r="0.6" fill="rgba(255,240,200,0.8)"/>
+          <circle cx="90"  cy="22" r="0.3" fill="rgba(255,255,255,0.5)"/>
+          <circle cx="120" cy="10" r="0.5" fill="rgba(200,220,255,0.7)"/>
+          <circle cx="148" cy="30" r="0.4" fill="rgba(255,240,200,0.6)"/>
+          <circle cx="170" cy="7"  r="0.3" fill="rgba(255,255,255,0.5)"/>
+          <circle cx="200" cy="18" r="0.5" fill="rgba(200,220,255,0.6)"/>
+          <circle cx="230" cy="6"  r="0.4" fill="rgba(255,240,200,0.7)"/>
+          <circle cx="260" cy="25" r="0.3" fill="rgba(255,255,255,0.5)"/>
+          <circle cx="285" cy="12" r="0.6" fill="rgba(255,240,200,0.6)"/>
+          <circle cx="310" cy="8"  r="0.4" fill="rgba(200,220,255,0.7)"/>
+          <circle cx="340" cy="20" r="0.3" fill="rgba(255,255,255,0.5)"/>
+          <circle cx="365" cy="14" r="0.5" fill="rgba(255,240,200,0.8)"/>
+          <circle cx="395" cy="9"  r="0.4" fill="rgba(200,220,255,0.6)"/>
+          <circle cx="50"  cy="55" r="0.4" fill="rgba(255,255,255,0.4)"/>
+          <circle cx="100" cy="70" r="0.3" fill="rgba(200,220,255,0.5)"/>
+          <circle cx="160" cy="65" r="0.4" fill="rgba(255,240,200,0.5)"/>
+          <circle cx="220" cy="72" r="0.3" fill="rgba(255,255,255,0.4)"/>
+          <circle cx="270" cy="58" r="0.5" fill="rgba(200,220,255,0.5)"/>
+          <circle cx="330" cy="68" r="0.4" fill="rgba(255,240,200,0.6)"/>
+          <circle cx="380" cy="60" r="0.3" fill="rgba(255,255,255,0.4)"/>
+          <circle cx="410" cy="75" r="0.4" fill="rgba(200,220,255,0.5)"/>
+ 
+          <!-- Ryland (the star) — top left, warm sun glow -->
+          <circle cx="28" cy="28" r="22" fill="url(#sunGrad)" opacity="0.5"/>
+          <circle cx="28" cy="28" r="10" fill="url(#sunGrad)" opacity="0.6"/>
+          <circle cx="28" cy="28" r="4"  fill="#fff8e0" opacity="0.95"/>
+ 
+          <!-- Astrophage belt — faint golden line near Ryland -->
+          <ellipse cx="28" cy="28" rx="18" ry="5" fill="none" stroke="rgba(255,210,80,0.12)" stroke-width="1.5"/>
+ 
+          <!-- Adrian planet — large, right side, partially cropped for drama -->
+          <!-- atmosphere halo -->
+          <circle cx="340" cy="45" r="54" fill="url(#atmGrad)"/>
+          <!-- planet body -->
+          <circle cx="340" cy="45" r="44" fill="url(#adrianGrad)"/>
+          <!-- surface bands / terrain detail -->
+          <ellipse cx="340" cy="30" rx="44" ry="8"  fill="rgba(180,70,20,0.25)" transform="rotate(-8,340,30)"/>
+          <ellipse cx="340" cy="48" rx="40" ry="6"  fill="rgba(100,30,5,0.20)"  transform="rotate(5,340,48)"/>
+          <ellipse cx="340" cy="60" rx="38" ry="5"  fill="rgba(220,100,40,0.15)" transform="rotate(-3,340,60)"/>
+          <!-- terminator shadow -->
+          <circle cx="340" cy="45" r="44" fill="rgba(10,4,2,0.38)" clip-path="url(#termClip)"/>
+          <!-- rim light — warm orange from Ryland -->
+          <circle cx="340" cy="45" r="44" fill="none" stroke="rgba(240,150,60,0.35)" stroke-width="2.5"/>
+ 
+          <!-- Rocky (Adrian) — tiny multi-ring being, near planet -->
+          <g transform="translate(262,38)">
+            <circle r="7"   fill="none" stroke="rgba(184,132,58,0.55)" stroke-width="0.7"/>
+            <circle r="4.5" fill="none" stroke="rgba(184,132,58,0.40)" stroke-width="0.6"/>
+            <circle r="2"   fill="rgba(255,200,50,0.7)"/>
+            <line x1="0" y1="-9"  x2="0"  y2="-12" stroke="rgba(184,132,58,0.45)" stroke-width="0.6"/>
+            <line x1="9" y1="0"   x2="12" y2="0"   stroke="rgba(184,132,58,0.45)" stroke-width="0.6"/>
+            <line x1="0" y1="9"   x2="0"  y2="12"  stroke="rgba(184,132,58,0.45)" stroke-width="0.6"/>
+            <line x1="-9" y1="0"  x2="-12" y2="0"  stroke="rgba(184,132,58,0.45)" stroke-width="0.6"/>
+          </g>
+ 
+          <!-- Hail Mary ship — tiny silhouette between Ryland and Adrian -->
+          <g transform="translate(138,36)" opacity="0.65">
+            <ellipse rx="9" ry="2.5" fill="rgba(200,210,220,0.6)"/>
+            <ellipse rx="4" ry="1.5" cy="-1.5" fill="rgba(180,190,200,0.5)"/>
+            <line x1="-9" y1="0" x2="-15" y2="2" stroke="rgba(180,190,200,0.4)" stroke-width="0.7"/>
+            <line x1="9"  y1="0" x2="15"  y2="-2" stroke="rgba(180,190,200,0.4)" stroke-width="0.7"/>
+            <!-- engine glow -->
+            <circle cx="-10" cy="1" r="1.5" fill="rgba(100,180,255,0.7)"/>
+          </g>
+ 
+          <!-- label: Adrian -->
+          <text x="310" y="86" font-family="Georgia,serif" font-style="italic" font-size="7.5" fill="rgba(220,130,70,0.55)" letter-spacing="1.5">Adrian</text>
+          <!-- label: Rocky -->
+          <text x="253" y="55" font-family="Georgia,serif" font-style="italic" font-size="6.5" fill="rgba(184,150,58,0.5)" letter-spacing="1">Rocky</text>
+          <!-- label: Ryland -->
+          <text x="6" y="58" font-family="Georgia,serif" font-style="italic" font-size="6.5" fill="rgba(255,230,140,0.45)" letter-spacing="1">Ryland ★</text>
+        </g>
+      </svg>
+    </div>
+ 
+    <div class="card-body">
+    <span class="orn tl" style="position:absolute;top:10px;left:12px;">✦</span>
+    <span class="orn tr" style="position:absolute;top:10px;right:12px;transform:scaleX(-1);">✦</span>
+    <span class="orn bl" style="position:absolute;bottom:10px;left:12px;transform:scaleY(-1);">✦</span>
+    <span class="orn br" style="position:absolute;bottom:10px;right:12px;transform:scale(-1);">✦</span>
  
     <!-- INVITE -->
     <div id="inviteScreen">
-      <span class="eyelet">◉</span>
+      <div style="text-align:center;margin-bottom:10px;">
+        <span class="astrophage"></span>
+      </div>
       <div class="dateline">A Personal Invitation</div>
  
       <h1>Will you go on a<br><em>date</em> with me?</h1>
@@ -376,8 +560,10 @@
  
       <div class="divider"><div class="divider-line"></div><div class="divider-glyph">◈</div><div class="divider-line"></div></div>
       <div class="stamp">It's a date ✦</div>
+    </div><!-- /card-body -->
+ 
     <!-- LOCKED SCREEN -->
-    <div class="locked-screen" id="lockedScreen">
+    <div class="locked-screen" id="lockedScreen" style="padding:32px 48px 0;">
       <div class="locked-icon">🔒</div>
       <div class="locked-title">You've already answered</div>
       <div class="locked-sub">
@@ -390,9 +576,43 @@
  
     </div>
   </div>
+  </div>
 </div>
  
 <script>
+  /* STARFIELD */
+  (function(){
+    const cv = document.getElementById('starfield');
+    const ctx = cv.getContext('2d');
+    function resize(){ cv.width=window.innerWidth; cv.height=window.innerHeight; drawStars(); }
+    function drawStars(){
+      ctx.clearRect(0,0,cv.width,cv.height);
+      const rng = (s)=>{ let x=s; return ()=>{ x=Math.sin(x)*10000; return x-Math.floor(x); }; };
+      const r = rng(42);
+      for(let i=0;i<260;i++){
+        const x=r()*cv.width, y=r()*cv.height;
+        const sz=r()*1.4+0.2;
+        const alpha=r()*0.55+0.15;
+        const warm = r()>0.7;
+        ctx.beginPath();
+        ctx.arc(x,y,sz,0,Math.PI*2);
+        ctx.fillStyle = warm
+          ? `rgba(255,220,150,${alpha})`
+          : `rgba(200,210,255,${alpha})`;
+        ctx.fill();
+      }
+      // faint milky-way streak
+      const grd=ctx.createLinearGradient(cv.width*0.1,cv.height*0.3,cv.width*0.9,cv.height*0.7);
+      grd.addColorStop(0,'transparent');
+      grd.addColorStop(0.5,'rgba(180,160,220,0.04)');
+      grd.addColorStop(1,'transparent');
+      ctx.fillStyle=grd;
+      ctx.fillRect(0,0,cv.width,cv.height);
+    }
+    window.addEventListener('resize',resize);
+    resize();
+  })();
+ 
   /* PARTICLES */
   const syms = ['♪','♫','♬','◉','♩','∿','◎'];
   const pc = document.getElementById('particles');
