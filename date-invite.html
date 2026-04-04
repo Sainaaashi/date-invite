@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Special Invitation 💌</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --rose: #c9435a;
+    --rose-light: #f5d0d8;
+    --rose-deep: #8c1e30;
+    --cream: #fdf6ef;
+    --warm: #f0e6d8;
+    --gold: #c8964a;
+    --gold-light: #f5e4c8;
+    --ink: #2a1a14;
+    --ink-muted: #6b4c3f;
+  }
+
+  html, body {
+    min-height: 100%;
+    background: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  body {
+    background-image:
+      radial-gradient(ellipse at 10% 20%, rgba(201,67,90,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 80%, rgba(200,150,74,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(240,230,216,0.5) 0%, transparent 80%);
+  }
+
+  .petals {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .petal {
+    position: absolute;
+    width: 10px; height: 14px;
+    background: var(--rose-light);
+    border-radius: 50% 0 50% 0;
+    opacity: 0;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 0.7; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  .envelope-wrap {
+    perspective: 1000px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 2px;
+    max-width: 520px;
+    width: 100%;
+    padding: 56px 52px 48px;
+    position: relative;
+    box-shadow:
+      0 2px 0 var(--rose-light),
+      0 4px 0 rgba(201,67,90,0.1),
+      0 20px 60px rgba(42,26,20,0.12),
+      0 2px 8px rgba(42,26,20,0.08);
+    animation: cardIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(32px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rose-light), var(--rose), var(--gold), var(--rose), var(--rose-light));
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--rose-light), transparent);
+  }
+
+  .corner-ornament {
+    position: absolute;
+    color: var(--rose-light);
+    font-size: 18px;
+    line-height: 1;
+  }
+  .corner-ornament.tl { top: 12px; left: 14px; }
+  .corner-ornament.tr { top: 12px; right: 14px; transform: scaleX(-1); }
+  .corner-ornament.bl { bottom: 12px; left: 14px; transform: scaleY(-1); }
+  .corner-ornament.br { bottom: 12px; right: 14px; transform: scale(-1); }
+
+  .eyelet {
+    text-align: center;
+    margin-bottom: 12px;
+    font-size: 22px;
+    animation: heartPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes heartPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+  }
+
+  .dateline {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  .divider-line { flex: 1; height: 0.5px; background: var(--rose-light); }
+  .divider-diamond { width: 5px; height: 5px; background: var(--rose); transform: rotate(45deg); flex-shrink: 0; }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 400;
+    text-align: center;
+    color: var(--rose-deep);
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+
+  h1 em {
+    font-style: italic;
+    font-size: 36px;
+    color: var(--rose);
+  }
+
+  .salutation {
+    text-align: center;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin: 18px 0 10px;
+    line-height: 1.7;
+  }
+
+  .body-text {
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--ink-muted);
+    font-weight: 300;
+    margin-bottom: 6px;
+  }
+
+  .signature {
+    text-align: center;
+    margin-top: 24px;
+    margin-bottom: 32px;
+  }
+  .signature-line {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--rose);
+  }
+  .signature-title {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 300;
+    margin-top: 4px;
+  }
+
+  .rsvp-label {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+
+  .buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+  }
+
+  .btn-yes {
+    background: var(--rose);
+    color: white;
+    border: none;
+    padding: 13px 38px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    border-radius: 1px;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    font-weight: 400;
+    box-shadow: 0 2px 12px rgba(201,67,90,0.3);
+  }
+
+  .btn-yes:hover {
+    background: var(--rose-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201,67,90,0.4);
+  }
+
+  .btn-yes:active { transform: scale(0.97); }
+
+  .btn-no {
+    background: transparent;
+    color: var(--ink-muted);
+    border: 0.5px solid #d4c4bc;
+    padding: 13px 28px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    border-radius: 1px;
+    transition: left 0.35s cubic-bezier(0.22,1,0.36,1), top 0.35s cubic-bezier(0.22,1,0.36,1);
+    font-weight: 300;
+    position: absolute;
+    z-index: 999;
+    white-space: nowrap;
+    pointer-events: auto;
+  }
+
+  #rsvpZone {
+    min-height: 120px;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .no-counter-msg {
+    text-align: center;
+    font-size: 13px;
+    color: var(--rose);
+    font-style: italic;
+    min-height: 20px;
+    margin-top: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .no-counter-msg.show { opacity: 1; }
+
+  /* ---- YES ACCEPTED SCREEN ---- */
+  .accepted-screen {
+    display: none;
+    text-align: center;
+    animation: fadeInUp 0.7s cubic-bezier(0.22,1,0.36,1) both;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .accepted-screen.show { display: block; }
+
+  .confetti-emoji {
+    font-size: 32px;
+    margin-bottom: 12px;
+    animation: bounce 0.6s ease infinite alternate;
+  }
+
+  @keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-8px); }
+  }
+
+  .accepted-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-style: italic;
+    color: var(--rose);
+    margin-bottom: 6px;
+  }
+
+  .accepted-sub {
+    font-size: 15px;
+    color: var(--ink-muted);
+    font-weight: 300;
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+
+  .ideas-label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+
+  .idea-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .idea-card {
+    background: var(--cream);
+    border: 0.5px solid var(--rose-light);
+    border-radius: 2px;
+    padding: 22px 18px 20px;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+  }
+
+  .idea-card:hover {
+    border-color: var(--rose);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(201,67,90,0.12);
+  }
+
+  .idea-icon { font-size: 28px; margin-bottom: 8px; }
+
+  .idea-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--rose-deep);
+    margin-bottom: 5px;
+  }
+
+  .idea-desc {
+    font-size: 13px;
+    color: var(--ink-muted);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ---- IDEA CHOSEN SCREEN ---- */
+  .chosen-screen {
+    display: none;
+    text-align: center;
+    animation: fadeInUp 0.7s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .chosen-screen.show { display: block; }
+
+  .chosen-icon { font-size: 44px; margin-bottom: 14px; }
+
+  .chosen-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-style: italic;
+    color: var(--rose);
+    margin-bottom: 10px;
+  }
+
+  .chosen-detail {
+    font-size: 16px;
+    color: var(--ink-muted);
+    font-weight: 300;
+    line-height: 1.9;
+    margin-bottom: 24px;
+  }
+
+  .stamp {
+    display: inline-block;
+    border: 2px solid var(--rose);
+    color: var(--rose);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 7px 20px;
+    font-weight: 400;
+    transform: rotate(-2deg);
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<div class="petals" id="petals"></div>
+
+<div class="page">
+  <div class="envelope-wrap">
+    <div class="card" id="mainCard">
+
+      <span class="corner-ornament tl">❧</span>
+      <span class="corner-ornament tr">❧</span>
+      <span class="corner-ornament bl">❧</span>
+      <span class="corner-ornament br">❧</span>
+
+      <!-- INVITATION SCREEN -->
+      <div id="inviteScreen">
+        <div class="eyelet">♥</div>
+        <div class="dateline">A Personal Invitation</div>
+
+        <h1>Will you go on a<br><em>date</em> with me?</h1>
+
+        <div class="divider">
+          <div class="divider-line"></div>
+          <div class="divider-diamond"></div>
+          <div class="divider-line"></div>
+        </div>
+
+        <p class="salutation">My dearest,</p>
+        <p class="body-text">
+          I have been thinking of you, and I would be
+          the happiest person in the world if you would
+          do me the honour of spending an evening with me.
+        </p>
+
+        <div class="divider">
+          <div class="divider-line"></div>
+          <div class="divider-diamond"></div>
+          <div class="divider-line"></div>
+        </div>
+
+        <div class="signature">
+          <div class="signature-line">With all my heart</div>
+          <div class="signature-title">Your Secret Admirer</div>
+        </div>
+
+        <div class="rsvp-label">— R.S.V.P —</div>
+
+        <div id="rsvpZone" style="position:relative; min-height: 100px; display:flex; flex-direction:column; align-items:center; gap:0;">
+          <div class="buttons" style="position:relative; z-index:1;">
+            <button class="btn-yes" id="btnYes" onclick="sayYes()">Yes, of course! ♥</button>
+            <button class="btn-no" id="btnNo" onmouseenter="runAway()" ontouchstart="runAway()">No</button>
+          </div>
+        </div>
+        <div class="no-counter-msg" id="noMsg"></div>
+      </div>
+
+      <!-- ACCEPTED SCREEN -->
+      <div class="accepted-screen" id="acceptedScreen">
+        <div class="confetti-emoji">🎉</div>
+        <div class="accepted-title">You said yes!</div>
+        <div class="accepted-sub">I am absolutely overjoyed. Now, let's decide…</div>
+
+        <div class="divider">
+          <div class="divider-line"></div>
+          <div class="divider-diamond"></div>
+          <div class="divider-line"></div>
+        </div>
+
+        <div class="ideas-label">— Choose our date —</div>
+
+        <div class="idea-cards">
+          <div class="idea-card" onclick="choosePlan('dinner')">
+            <div class="idea-icon">🕯️</div>
+            <div class="idea-title">Candlelit Dinner</div>
+            <div class="idea-desc">A quiet table for two, wine, and the night to ourselves.</div>
+          </div>
+          <div class="idea-card" onclick="choosePlan('picnic')">
+            <div class="idea-icon">🌸</div>
+            <div class="idea-title">Sunset Picnic</div>
+            <div class="idea-desc">Soft blanket, golden hour, and everything we love.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHOSEN SCREEN -->
+      <div class="chosen-screen" id="chosenScreen">
+        <div class="chosen-icon" id="chosenIcon"></div>
+        <div class="chosen-title" id="chosenTitle"></div>
+        <p class="chosen-detail" id="chosenDetail"></p>
+        <div class="divider">
+          <div class="divider-line"></div>
+          <div class="divider-diamond"></div>
+          <div class="divider-line"></div>
+        </div>
+        <div class="stamp">It's a date ✦</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // Falling petals
+  const petalContainer = document.getElementById('petals');
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDelay = Math.random() * 10 + 's';
+    p.style.animationDuration = (8 + Math.random() * 8) + 's';
+    p.style.opacity = 0.4 + Math.random() * 0.4;
+    p.style.transform = `scale(${0.6 + Math.random() * 0.8})`;
+    const hue = 340 + Math.floor(Math.random() * 20);
+    p.style.background = `hsl(${hue}, 65%, ${80 + Math.floor(Math.random()*12)}%)`;
+    petalContainer.appendChild(p);
+  }
+
+  let noCount = 0;
+  const msgs = [
+    "That button doesn't seem to work… 🤔",
+    "Hmm, it keeps slipping away!",
+    "Maybe it's trying to tell you something~",
+    "Perhaps 'Yes' is the only answer? 💕",
+    "The 'No' button is very shy today.",
+    "It really doesn't want to be clicked!",
+    "Some things are just meant to be… ✨"
+  ];
+
+  const btn = document.getElementById('btnNo');
+  let isMoving = false;
+
+  function runAway() {
+    if (isMoving) return;
+    isMoving = true;
+
+    noCount++;
+    const msg = document.getElementById('noMsg');
+    msg.textContent = msgs[Math.min(noCount - 1, msgs.length - 1)];
+    msg.classList.add('show');
+
+    const zone = document.getElementById('rsvpZone');
+    const zoneRect = zone.getBoundingClientRect();
+    const btnW = btn.offsetWidth;
+    const btnH = btn.offsetHeight;
+
+    // Ensure zone is tall enough for the button to roam
+    zone.style.minHeight = Math.max(100, btnH + 20) + 'px';
+
+    // Convert zone to relative positioning context — btn is absolute inside zone
+    // Get current btn position relative to zone
+    const btnRect = btn.getBoundingClientRect();
+    if (btn.style.left === '') {
+      // First move: anchor to current position inside zone
+      btn.style.left = (btnRect.left - zoneRect.left) + 'px';
+      btn.style.top = (btnRect.top - zoneRect.top) + 'px';
+    }
+
+    const padding = 8;
+    const maxX = zone.offsetWidth - btnW - padding;
+    const maxY = zone.offsetHeight - btnH - padding;
+
+    let newX, newY, attempts = 0;
+    do {
+      newX = padding + Math.random() * Math.max(0, maxX - padding);
+      newY = padding + Math.random() * Math.max(0, maxY - padding);
+      attempts++;
+    } while (attempts < 20 && Math.hypot(newX - parseFloat(btn.style.left || 0), newY - parseFloat(btn.style.top || 0)) < 60);
+
+    btn.style.left = newX + 'px';
+    btn.style.top = newY + 'px';
+
+    setTimeout(() => { isMoving = false; }, 380);
+  }
+
+  // Mobile: move on touchstart
+  btn.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    runAway();
+  }, { passive: false });
+
+  function sayYes() {
+    // Explosion of hearts
+    spawnHearts();
+    document.getElementById('inviteScreen').style.display = 'none';
+    btn.style.display = 'none';
+    document.getElementById('noMsg').style.display = 'none';
+    setTimeout(() => {
+      document.getElementById('acceptedScreen').classList.add('show');
+    }, 300);
+  }
+
+  function spawnHearts() {
+    for (let i = 0; i < 20; i++) {
+      const h = document.createElement('div');
+      h.textContent = '♥';
+      h.style.cssText = `
+        position:fixed;
+        z-index:9999;
+        font-size:${16 + Math.random()*18}px;
+        color:hsl(${340+Math.random()*20},70%,${55+Math.random()*20}%);
+        left:${20 + Math.random()*60}%;
+        top:${20 + Math.random()*60}%;
+        pointer-events:none;
+        animation: heartFly 1.2s ease-out forwards;
+        animation-delay:${Math.random()*0.4}s;
+      `;
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 1800);
+    }
+  }
+
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes heartFly {
+      0% { opacity:1; transform: scale(0) translateY(0); }
+      60% { opacity:1; transform: scale(1.3) translateY(-60px); }
+      100% { opacity:0; transform: scale(0.8) translateY(-120px); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  const plans = {
+    dinner: {
+      icon: '🕯️',
+      title: 'A Candlelit Dinner',
+      detail: 'A table just for us — soft candlelight, slow music, and the kind of conversation that makes time disappear. I will take care of every detail. All you need to do is arrive.'
+    },
+    picnic: {
+      icon: '🌸',
+      title: 'A Sunset Picnic',
+      detail: 'A soft blanket, your favourite things to eat, and the sky turning gold above us. No rush, no noise — just us, watching the world slow down together.'
+    }
+  };
+
+  function choosePlan(type) {
+    const plan = plans[type];
+    document.getElementById('chosenIcon').textContent = plan.icon;
+    document.getElementById('chosenTitle').textContent = plan.title;
+    document.getElementById('chosenDetail').textContent = plan.detail;
+    document.getElementById('acceptedScreen').classList.remove('show');
+    document.getElementById('acceptedScreen').style.display = 'none';
+    setTimeout(() => {
+      document.getElementById('chosenScreen').classList.add('show');
+      spawnHearts();
+    }, 100);
+  }
+</script>
+</body>
+</html>
