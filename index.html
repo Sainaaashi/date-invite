@@ -22,18 +22,9 @@
     --ink2:      #5a3a2a;
     --cream:     #fdf6ec;
   }
- 
-  html, body {
-    min-height: 100%;
-    background: var(--bg);
-    font-family: 'EB Garamond', serif;
-    color: var(--ink);
-    overflow-x: hidden;
-  }
- 
+  html, body { min-height:100%; background:var(--bg); font-family:'EB Garamond',serif; color:var(--ink); overflow-x:hidden; }
   body::before {
-    content:'';
-    position:fixed; inset:0;
+    content:''; position:fixed; inset:0;
     background:
       radial-gradient(ellipse at 18% 22%, rgba(155,58,82,0.18) 0%, transparent 48%),
       radial-gradient(ellipse at 80% 72%, rgba(184,132,58,0.12) 0%, transparent 48%),
@@ -42,309 +33,116 @@
       radial-gradient(ellipse at 50% 50%, rgba(6,4,10,0.55) 0%, transparent 80%);
     z-index:0; pointer-events:none;
   }
- 
-  /* STARFIELD */
   #starfield { position:fixed; inset:0; pointer-events:none; z-index:0; }
- 
-  /* PHM QUOTE strip above card */
-  .phm-quote {
-    text-align:center;
-    margin-bottom:18px;
-    opacity:0;
-    animation: fadeUp 1.2s 0.5s cubic-bezier(0.22,1,0.36,1) forwards;
-  }
-  .phm-quote-text {
-    font-family:'EB Garamond',serif;
-    font-size:12px;
-    font-style:italic;
-    letter-spacing:0.14em;
-    color:rgba(184,132,58,0.55);
-  }
-  .phm-quote-attr {
-    font-size:10px;
-    letter-spacing:0.2em;
-    text-transform:uppercase;
-    color:rgba(184,132,58,0.3);
-    margin-top:3px;
-  }
- 
-  /* Adrian planet scene */
-  .adrian-scene {
-    width: 100%;
-    margin: 0 0 0 0;
-    overflow: hidden;
-    display: block;
-  }
-  .adrian-svg {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
- 
-  /* Astrophage glow dot on card */
+  .phm-quote { text-align:center; margin-bottom:18px; opacity:0; animation:fadeUp 1.2s 0.5s cubic-bezier(0.22,1,0.36,1) forwards; }
+  .phm-quote-text { font-family:'EB Garamond',serif; font-size:12px; font-style:italic; letter-spacing:0.14em; color:rgba(184,132,58,0.55); }
+  .phm-quote-attr { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(184,132,58,0.3); margin-top:3px; }
+  .adrian-scene { width:100%; overflow:hidden; display:block; }
+  .adrian-svg { display:block; width:100%; height:auto; }
   .astrophage {
-    display:inline-block;
-    width:7px; height:7px;
-    border-radius:50%;
-    background: radial-gradient(circle, #ffe066 0%, #ffaa00 60%, transparent 100%);
-    box-shadow: 0 0 6px 2px rgba(255,200,50,0.5);
-    animation: astrophagePulse 3s ease-in-out infinite;
-    vertical-align:middle;
-    margin: 0 5px;
+    display:inline-block; width:7px; height:7px; border-radius:50%;
+    background:radial-gradient(circle, #ffe066 0%, #ffaa00 60%, transparent 100%);
+    box-shadow:0 0 6px 2px rgba(255,200,50,0.5);
+    animation:astrophagePulse 3s ease-in-out infinite; vertical-align:middle; margin:0 5px;
   }
   @keyframes astrophagePulse {
     0%,100% { box-shadow:0 0 5px 2px rgba(255,200,50,0.4); transform:scale(1); }
     50%      { box-shadow:0 0 12px 5px rgba(255,200,50,0.7); transform:scale(1.25); }
   }
- 
   .particles { position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden; }
-  .particle {
-    position:absolute; opacity:0;
-    animation:drift linear infinite;
-    color:rgba(184,132,58,0.32);
-    user-select:none;
-  }
+  .particle { position:absolute; opacity:0; animation:drift linear infinite; color:rgba(184,132,58,0.32); user-select:none; }
   @keyframes drift {
-    0%   { transform:translateY(108vh) rotate(0deg);   opacity:0; }
+    0%   { transform:translateY(108vh) rotate(0deg); opacity:0; }
     8%   { opacity:0.5; }
     92%  { opacity:0.28; }
-    100% { transform:translateY(-8vh)  rotate(380deg); opacity:0; }
+    100% { transform:translateY(-8vh) rotate(380deg); opacity:0; }
   }
- 
-  .page {
-    position:relative; z-index:2;
-    min-height:100vh;
-    display:flex; align-items:center; justify-content:center;
-    padding:48px 20px;
-  }
- 
+  .page { position:relative; z-index:2; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:48px 20px; }
   .card {
-    background:var(--card);
-    max-width:500px; width:100%;
-    padding:0 0 44px 0;
-    position:relative;
-    overflow:hidden;
-    box-shadow:
-      0 0 0 1px rgba(184,132,58,0.22),
-      0 0 0 5px rgba(155,58,82,0.06),
-      0 36px 90px rgba(0,0,0,0.62),
-      0 4px 18px rgba(0,0,0,0.28);
+    background:var(--card); max-width:500px; width:100%; padding:0 0 44px 0;
+    position:relative; overflow:hidden;
+    box-shadow: 0 0 0 1px rgba(184,132,58,0.22), 0 0 0 5px rgba(155,58,82,0.06), 0 36px 90px rgba(0,0,0,0.62), 0 4px 18px rgba(0,0,0,0.28);
     animation:cardRise 1s cubic-bezier(0.22,1,0.36,1) both;
   }
-  .card-body {
-    padding: 32px 48px 0;
-  }
-  @keyframes cardRise {
-    from { opacity:0; transform:translateY(38px) scale(0.97); }
-    to   { opacity:1; transform:translateY(0)    scale(1); }
-  }
-  .card::before {
-    content:'';
-    position:absolute; top:0; left:0; right:0; height:2px;
-    background:linear-gradient(90deg, transparent, var(--gold), var(--rose), var(--gold), transparent);
-  }
-  .card::after {
-    content:'';
-    position:absolute; bottom:0; left:0; right:0; height:1px;
-    background:linear-gradient(90deg, transparent, rgba(155,58,82,0.3), transparent);
-  }
- 
+  .card-body { padding:32px 48px 0; }
+  @keyframes cardRise { from{opacity:0;transform:translateY(38px) scale(0.97);} to{opacity:1;transform:translateY(0) scale(1);} }
+  .card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--gold),var(--rose),var(--gold),transparent); }
+  .card::after  { content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(155,58,82,0.3),transparent); }
   .orn { position:absolute; font-size:12px; color:rgba(184,132,58,0.4); line-height:1; }
   .orn.tl{top:10px;left:12px;} .orn.tr{top:10px;right:12px;transform:scaleX(-1);}
   .orn.bl{bottom:10px;left:12px;transform:scaleY(-1);} .orn.br{bottom:10px;right:12px;transform:scale(-1);}
- 
   .eyelet { text-align:center; font-size:20px; color:var(--gold); margin-bottom:10px; display:block; animation:vinylSpin 8s linear infinite; }
   @keyframes vinylSpin { to { transform:rotate(360deg); } }
- 
-  .dateline {
-    text-align:center; font-size:10px; letter-spacing:0.28em;
-    text-transform:uppercase; color:var(--dust); margin-bottom:24px;
-  }
- 
-  h1 {
-    font-family:'Playfair Display',serif; font-size:30px; font-weight:400;
-    text-align:center; color:var(--ink); line-height:1.3; margin-bottom:4px;
-  }
+  .dateline { text-align:center; font-size:10px; letter-spacing:0.28em; text-transform:uppercase; color:var(--dust); margin-bottom:24px; }
+  h1 { font-family:'Playfair Display',serif; font-size:30px; font-weight:400; text-align:center; color:var(--ink); line-height:1.3; margin-bottom:4px; }
   h1 em { font-style:italic; font-size:34px; color:var(--rose); }
- 
   .divider { display:flex; align-items:center; gap:10px; margin:18px 0; }
   .divider-line  { flex:1; height:0.5px; background:rgba(155,58,82,0.22); }
   .divider-glyph { font-size:11px; color:var(--gold-lt); flex-shrink:0; }
- 
   .salutation { text-align:center; font-size:17px; font-style:italic; color:var(--ink2); margin:14px 0 8px; line-height:1.7; }
   .body-text   { text-align:center; font-size:15.5px; line-height:2; color:var(--ink2); font-weight:300; }
- 
   .signature { text-align:center; margin:22px 0 28px; }
-  .sig-line  { font-family:'Playfair Display',serif; font-size:20px; font-style:italic; color:var(--rose); }
-  .sig-sub   { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--dust); margin-top:4px; }
- 
+  .sig-line { font-family:'Playfair Display',serif; font-size:20px; font-style:italic; color:var(--rose); }
+  .sig-sub  { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--dust); margin-top:4px; }
   .rsvp-label { text-align:center; font-size:10px; letter-spacing:0.26em; text-transform:uppercase; color:var(--dust); margin-bottom:14px; }
- 
   .btn-yes {
-    background:var(--rose); color:#fdf0e8; border:none;
-    padding:12px 36px; font-family:'EB Garamond',serif;
-    font-size:16px; letter-spacing:0.1em; cursor:pointer;
-    transition:background 0.2s, transform 0.15s, box-shadow 0.2s;
-    font-weight:400; box-shadow:0 2px 14px rgba(155,58,82,0.35);
-    display:block; margin:0 auto 14px;
+    background:var(--rose); color:#fdf0e8; border:none; padding:12px 36px;
+    font-family:'EB Garamond',serif; font-size:16px; letter-spacing:0.1em; cursor:pointer;
+    transition:background 0.2s,transform 0.15s,box-shadow 0.2s; font-weight:400;
+    box-shadow:0 2px 14px rgba(155,58,82,0.35); display:block; margin:0 auto 14px;
   }
   .btn-yes:hover { background:#7a2a3e; transform:translateY(-2px); box-shadow:0 6px 22px rgba(155,58,82,0.45); }
   .btn-yes:active { transform:scale(0.97); }
- 
   .btn-no {
-    background:var(--card2); color:var(--ink2);
-    border:0.5px solid rgba(155,58,82,0.28);
-    padding:11px 26px; font-family:'EB Garamond',serif;
-    font-size:15px; letter-spacing:0.06em; cursor:pointer;
-    font-weight:400; position:absolute; z-index:10;
-    white-space:nowrap; pointer-events:auto;
-    transition:left 0.32s cubic-bezier(0.22,1,0.36,1), top 0.32s cubic-bezier(0.22,1,0.36,1);
+    background:var(--card2); color:var(--ink2); border:0.5px solid rgba(155,58,82,0.28);
+    padding:11px 26px; font-family:'EB Garamond',serif; font-size:15px; letter-spacing:0.06em;
+    cursor:pointer; font-weight:400; position:absolute; z-index:10; white-space:nowrap;
+    pointer-events:auto; transition:left 0.32s cubic-bezier(0.22,1,0.36,1), top 0.32s cubic-bezier(0.22,1,0.36,1);
   }
   .btn-no:hover { background:var(--rose-pale); }
- 
   #rsvpZone { min-height:120px; overflow:hidden; width:100%; position:relative; }
- 
   .no-msg { text-align:center; font-size:13px; color:var(--rose-lt); font-style:italic; min-height:18px; margin-top:8px; opacity:0; transition:opacity 0.3s; }
   .no-msg.show { opacity:1; }
- 
-  /* ACCEPTED */
   .accepted-screen { display:none; text-align:center; animation:fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both; }
   .accepted-screen.show { display:block; }
   @keyframes fadeUp { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:translateY(0);} }
- 
   .acc-icon  { font-size:28px; margin-bottom:10px; }
   .acc-title { font-family:'Playfair Display',serif; font-size:26px; font-style:italic; color:var(--rose); margin-bottom:4px; }
   .acc-sub   { font-size:14px; color:var(--dust); font-style:italic; margin-bottom:24px; }
- 
   .ideas-label { font-size:10px; letter-spacing:0.24em; text-transform:uppercase; color:var(--dust); margin-bottom:16px; }
- 
   .idea-cards { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   .idea-card {
     background:var(--cream); border:0.5px solid rgba(155,58,82,0.18);
     padding:20px 14px 18px; cursor:pointer; text-align:center;
-    position:relative; overflow:hidden;
-    transition:border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    position:relative; overflow:hidden; transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;
   }
-  .idea-card::after {
-    content:''; position:absolute; bottom:0; left:0; right:0; height:2px;
-    background:linear-gradient(90deg,var(--rose),var(--gold));
-    transform:scaleX(0); transition:transform 0.25s; transform-origin:left;
-  }
+  .idea-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--rose),var(--gold)); transform:scaleX(0); transition:transform 0.25s; transform-origin:left; }
   .idea-card:hover { border-color:var(--rose); transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,0.08); }
   .idea-card:hover::after { transform:scaleX(1); }
- 
   .idea-icon  { font-size:26px; margin-bottom:8px; }
   .idea-title { font-family:'Playfair Display',serif; font-size:15px; font-style:italic; color:var(--ink); margin-bottom:5px; }
   .idea-desc  { font-size:12.5px; color:var(--ink2); font-weight:300; line-height:1.6; }
- 
-  /* CHOSEN */
   .chosen-screen { display:none; text-align:center; animation:fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both; }
   .chosen-screen.show { display:block; }
- 
-  .chosen-icon { font-size:44px; margin-bottom:10px; }
+  .chosen-icon  { font-size:44px; margin-bottom:10px; }
   .chosen-title { font-family:'Playfair Display',serif; font-size:26px; font-style:italic; color:var(--rose); margin-bottom:20px; }
- 
-  .chosen-msg-block {
-    background: var(--card2);
-    border-left: 3px solid var(--rose);
-    padding: 16px 18px;
-    text-align: left;
-    margin-bottom: 18px;
-  }
-  .chosen-msg-line {
-    font-size: 15px;
-    color: var(--ink);
-    line-height: 1.85;
-    font-weight: 400;
-  }
-  .chosen-msg-line.highlight {
-    font-family: 'Playfair Display', serif;
-    font-size: 16px;
-    font-style: italic;
-    color: var(--rose);
-    margin-bottom: 4px;
-    display: block;
-  }
- 
-  .location-card {
-    background: var(--cream);
-    border: 0.5px solid rgba(184,132,58,0.35);
-    padding: 16px 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 20px;
-    text-align: left;
-  }
-  .location-info { flex: 1; }
-  .location-label {
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--dust);
-    margin-bottom: 4px;
-  }
-  .location-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 16px;
-    font-style: italic;
-    color: var(--ink);
-    margin-bottom: 2px;
-  }
-  .location-day {
-    font-size: 12px;
-    color: var(--dust);
-    letter-spacing: 0.08em;
-  }
-  .map-btn {
-    background: var(--rose);
-    color: #fdf0e8;
-    border: none;
-    padding: 9px 14px;
-    font-family: 'EB Garamond', serif;
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    cursor: pointer;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    white-space: nowrap;
-    flex-shrink: 0;
-    transition: background 0.2s;
-  }
-  .map-btn:hover { background: #7a2a3e; }
+  .chosen-msg-block { background:var(--card2); border-left:3px solid var(--rose); padding:16px 18px; text-align:left; margin-bottom:18px; }
+  .chosen-msg-line { font-size:15px; color:var(--ink); line-height:1.85; font-weight:400; }
+  .chosen-msg-line.highlight { font-family:'Playfair Display',serif; font-size:16px; font-style:italic; color:var(--rose); margin-bottom:4px; display:block; }
+  .location-card { background:var(--cream); border:0.5px solid rgba(184,132,58,0.35); padding:16px 18px; display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:20px; text-align:left; }
+  .location-info { flex:1; }
+  .location-label { font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--dust); margin-bottom:4px; }
+  .location-name  { font-family:'Playfair Display',serif; font-size:16px; font-style:italic; color:var(--ink); margin-bottom:2px; }
+  .location-day   { font-size:12px; color:var(--dust); letter-spacing:0.08em; }
+  .map-btn { background:var(--rose); color:#fdf0e8; border:none; padding:9px 14px; font-family:'EB Garamond',serif; font-size:13px; letter-spacing:0.08em; cursor:pointer; text-decoration:none; display:flex; align-items:center; gap:6px; white-space:nowrap; flex-shrink:0; transition:background 0.2s; }
+  .map-btn:hover { background:#7a2a3e; }
   .map-btn svg { width:14px; height:14px; fill:#fdf0e8; flex-shrink:0; }
- 
-  .stamp {
-    display:inline-block; border:1.5px solid var(--rose); color:var(--rose);
-    font-size:10px; letter-spacing:0.24em; text-transform:uppercase;
-    padding:7px 18px; transform:rotate(-1.5deg); margin-top:4px;
-  }
- 
-  /* LOCKED SCREEN */
-  .locked-screen {
-    display: none;
-    text-align: center;
-    padding: 20px 0;
-    animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) both;
-  }
-  .locked-screen.show { display: block; }
-  .locked-icon { font-size: 36px; margin-bottom: 16px; }
-  .locked-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-style: italic;
-    color: var(--rose);
-    margin-bottom: 10px;
-  }
-  .locked-sub {
-    font-size: 14.5px;
-    color: var(--dust);
-    font-style: italic;
-    line-height: 1.9;
-  }
+  .stamp { display:inline-block; border:1.5px solid var(--rose); color:var(--rose); font-size:10px; letter-spacing:0.24em; text-transform:uppercase; padding:7px 18px; transform:rotate(-1.5deg); margin-top:4px; }
+  .locked-screen { display:none; text-align:center; padding:20px 0; animation:fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) both; }
+  .locked-screen.show { display:block; }
+  .locked-icon  { font-size:36px; margin-bottom:16px; }
+  .locked-title { font-family:'Playfair Display',serif; font-size:22px; font-style:italic; color:var(--rose); margin-bottom:10px; }
+  .locked-sub   { font-size:14.5px; color:var(--dust); font-style:italic; line-height:1.9; }
 </style>
 </head>
 <body>
@@ -358,320 +156,246 @@
       <div class="phm-quote-text">"Two beings. Two worlds. One impossible friendship."</div>
       <div class="phm-quote-attr">— Project Hail Mary</div>
     </div>
-  <div class="card">
-    <!-- Adrian Planet scene -->
-    <div class="adrian-scene" aria-hidden="true">
-      <svg class="adrian-svg" viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <!-- Astrophage nebula turbulence colors -->
-          <radialGradient id="nebCore" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"   stop-color="#ff6a00" stop-opacity="0.55"/>
-            <stop offset="40%"  stop-color="#c84b00" stop-opacity="0.35"/>
-            <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="nebGreen" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"   stop-color="#22ff88" stop-opacity="0.35"/>
-            <stop offset="50%"  stop-color="#00cc55" stop-opacity="0.18"/>
-            <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
-          </radialGradient>
-          <filter id="turbulence" x="-20%" y="-20%" width="140%" height="140%">
-            <feTurbulence type="turbulence" baseFrequency="0.018 0.025" numOctaves="4" seed="7" result="turb"/>
-            <feDisplacementMap in="SourceGraphic" in2="turb" scale="18" xChannelSelector="R" yChannelSelector="G"/>
-          </filter>
-          <filter id="softBlur">
-            <feGaussianBlur stdDeviation="2.5"/>
-          </filter>
-          <!-- Adrian planet gradient — rust/amber/deep red -->
-          <radialGradient id="adrianGrad" cx="38%" cy="35%" r="58%">
-            <stop offset="0%"   stop-color="#f0a060"/>
-            <stop offset="30%"  stop-color="#c85a28"/>
-            <stop offset="65%"  stop-color="#8c2a10"/>
-            <stop offset="100%" stop-color="#3a0e04"/>
-          </radialGradient>
-          <!-- atmosphere glow -->
-          <radialGradient id="atmGrad" cx="50%" cy="50%" r="50%">
-            <stop offset="70%"  stop-color="transparent"/>
-            <stop offset="88%"  stop-color="rgba(220,120,50,0.18)"/>
-            <stop offset="100%" stop-color="rgba(220,120,50,0)"/>
-          </radialGradient>
-          <!-- Ryland star glow -->
-          <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"   stop-color="#fff8e0"/>
-            <stop offset="40%"  stop-color="#ffe090"/>
-            <stop offset="100%" stop-color="transparent"/>
-          </radialGradient>
-          <!-- space bg -->
-          <linearGradient id="spaceBg" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%"   stop-color="#08050f"/>
-            <stop offset="100%" stop-color="#0d0810"/>
-          </linearGradient>
-          <clipPath id="sceneClip">
-            <rect width="420" height="140" rx="3"/>
-          </clipPath>
-        </defs>
+    <div class="card">
  
-        <g clip-path="url(#sceneClip)">
-          <!-- deep space background -->
-          <rect width="420" height="140" fill="url(#spaceBg)"/>
- 
-          <!-- ══ ASTROPHAGE NEBULA — swirling green/orange below horizon ══ -->
-          <!-- base orange fire layer -->
-          <ellipse cx="210" cy="118" rx="230" ry="58" fill="url(#nebCore)" filter="url(#turbulence)"/>
-          <ellipse cx="180" cy="125" rx="180" ry="45" fill="#c84b00" opacity="0.18" filter="url(#softBlur)"/>
-          <ellipse cx="240" cy="130" rx="150" ry="38" fill="#ff6600" opacity="0.12" filter="url(#softBlur)"/>
-          <!-- green Astrophage glow layer -->
-          <ellipse cx="200" cy="122" rx="200" ry="52" fill="url(#nebGreen)" filter="url(#turbulence)"/>
-          <ellipse cx="260" cy="128" rx="140" ry="40" fill="#00ff66" opacity="0.08" filter="url(#softBlur)"/>
-          <!-- top edge fade of nebula into space -->
-          <rect x="0" y="90" width="420" height="50" fill="url(#spaceBg)" opacity="0.55"/>
- 
-          <!-- tiny background stars -->
-          <circle cx="12"  cy="8"  r="0.5" fill="rgba(255,240,200,0.7)"/>
-          <circle cx="38"  cy="18" r="0.4" fill="rgba(200,220,255,0.6)"/>
-          <circle cx="65"  cy="5"  r="0.6" fill="rgba(255,240,200,0.8)"/>
-          <circle cx="90"  cy="22" r="0.3" fill="rgba(255,255,255,0.5)"/>
-          <circle cx="120" cy="10" r="0.5" fill="rgba(200,220,255,0.7)"/>
-          <circle cx="148" cy="30" r="0.4" fill="rgba(255,240,200,0.6)"/>
-          <circle cx="170" cy="7"  r="0.3" fill="rgba(255,255,255,0.5)"/>
-          <circle cx="200" cy="18" r="0.5" fill="rgba(200,220,255,0.6)"/>
-          <circle cx="230" cy="6"  r="0.4" fill="rgba(255,240,200,0.7)"/>
-          <circle cx="260" cy="25" r="0.3" fill="rgba(255,255,255,0.5)"/>
-          <circle cx="285" cy="12" r="0.6" fill="rgba(255,240,200,0.6)"/>
-          <circle cx="310" cy="8"  r="0.4" fill="rgba(200,220,255,0.7)"/>
-          <circle cx="340" cy="20" r="0.3" fill="rgba(255,255,255,0.5)"/>
-          <circle cx="365" cy="14" r="0.5" fill="rgba(255,240,200,0.8)"/>
-          <circle cx="395" cy="9"  r="0.4" fill="rgba(200,220,255,0.6)"/>
-          <circle cx="50"  cy="55" r="0.4" fill="rgba(255,255,255,0.4)"/>
-          <circle cx="100" cy="70" r="0.3" fill="rgba(200,220,255,0.5)"/>
-          <circle cx="160" cy="65" r="0.4" fill="rgba(255,240,200,0.5)"/>
-          <circle cx="220" cy="72" r="0.3" fill="rgba(255,255,255,0.4)"/>
-          <circle cx="270" cy="58" r="0.5" fill="rgba(200,220,255,0.5)"/>
-          <circle cx="330" cy="68" r="0.4" fill="rgba(255,240,200,0.6)"/>
-          <circle cx="380" cy="60" r="0.3" fill="rgba(255,255,255,0.4)"/>
-          <circle cx="410" cy="75" r="0.4" fill="rgba(200,220,255,0.5)"/>
- 
-          <!-- Ryland (the star) — top left, warm sun glow -->
-          <circle cx="32" cy="38" r="26" fill="url(#sunGrad)" opacity="0.5"/>
-          <circle cx="32" cy="38" r="12" fill="url(#sunGrad)" opacity="0.6"/>
-          <circle cx="32" cy="38" r="5"  fill="#fff8e0" opacity="0.95"/>
- 
-          <!-- Astrophage belt — faint golden line near Ryland -->
-          <ellipse cx="32" cy="38" rx="20" ry="6" fill="none" stroke="rgba(255,210,80,0.15)" stroke-width="1.5"/>
- 
-          <!-- Adrian planet — large, right side, partially cropped for drama -->
-          <!-- atmosphere halo — pick up nebula green glow on lower rim -->
-          <circle cx="350" cy="55" r="62" fill="url(#atmGrad)"/>
-          <!-- planet body -->
-          <circle cx="350" cy="55" r="50" fill="url(#adrianGrad)"/>
-          <!-- surface bands / terrain detail -->
-          <ellipse cx="350" cy="38" rx="50" ry="9"  fill="rgba(180,70,20,0.25)" transform="rotate(-8,350,38)"/>
-          <ellipse cx="350" cy="58" rx="46" ry="7"  fill="rgba(100,30,5,0.20)"  transform="rotate(5,350,58)"/>
-          <ellipse cx="350" cy="72" rx="44" ry="6"  fill="rgba(220,100,40,0.15)" transform="rotate(-3,350,72)"/>
-          <!-- nebula green rim on lower planet edge -->
-          <circle cx="350" cy="55" r="50" fill="none" stroke="rgba(30,255,100,0.12)" stroke-width="4"/>
-          <!-- rim light — warm orange from Ryland -->
-          <circle cx="350" cy="55" r="50" fill="none" stroke="rgba(240,150,60,0.32)" stroke-width="2.5"/>
- 
-          <!-- Rocky (Adrian) — tiny multi-ring being, near planet -->
-          <g transform="translate(268,48)">
-            <circle r="7"   fill="none" stroke="rgba(184,132,58,0.55)" stroke-width="0.7"/>
-            <circle r="4.5" fill="none" stroke="rgba(184,132,58,0.40)" stroke-width="0.6"/>
-            <circle r="2"   fill="rgba(255,200,50,0.7)"/>
-            <line x1="0" y1="-9"  x2="0"  y2="-12" stroke="rgba(184,132,58,0.45)" stroke-width="0.6"/>
-            <line x1="9" y1="0"   x2="12" y2="0"   stroke="rgba(184,132,58,0.45)" stroke-width="0.6"/>
-            <line x1="0" y1="9"   x2="0"  y2="12"  stroke="rgba(184,132,58,0.45)" stroke-width="0.6"/>
-            <line x1="-9" y1="0"  x2="-12" y2="0"  stroke="rgba(184,132,58,0.45)" stroke-width="0.6"/>
+      <!-- ══ ADRIAN PLANET SCENE ══ -->
+      <div class="adrian-scene">
+        <svg class="adrian-svg" viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <radialGradient id="nebCore" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"   stop-color="#ff6a00" stop-opacity="0.55"/>
+              <stop offset="40%"  stop-color="#c84b00" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="nebGreen" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"   stop-color="#22ff88" stop-opacity="0.35"/>
+              <stop offset="50%"  stop-color="#00cc55" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="turb" x="-20%" y="-20%" width="140%" height="140%">
+              <feTurbulence type="turbulence" baseFrequency="0.018 0.025" numOctaves="4" seed="7" result="t"/>
+              <feDisplacementMap in="SourceGraphic" in2="t" scale="18" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="blur"><feGaussianBlur stdDeviation="2.5"/></filter>
+            <radialGradient id="adrianGrad" cx="38%" cy="35%" r="58%">
+              <stop offset="0%"   stop-color="#f0a060"/>
+              <stop offset="30%"  stop-color="#c85a28"/>
+              <stop offset="65%"  stop-color="#8c2a10"/>
+              <stop offset="100%" stop-color="#3a0e04"/>
+            </radialGradient>
+            <radialGradient id="atmGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="70%"  stop-color="transparent"/>
+              <stop offset="88%"  stop-color="rgba(220,120,50,0.18)"/>
+              <stop offset="100%" stop-color="rgba(220,120,50,0)"/>
+            </radialGradient>
+            <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"   stop-color="#fff8e0"/>
+              <stop offset="40%"  stop-color="#ffe090"/>
+              <stop offset="100%" stop-color="transparent"/>
+            </radialGradient>
+            <linearGradient id="spaceBg" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"   stop-color="#08050f"/>
+              <stop offset="100%" stop-color="#0d0810"/>
+            </linearGradient>
+            <clipPath id="sceneClip"><rect width="420" height="140" rx="3"/></clipPath>
+          </defs>
+          <g clip-path="url(#sceneClip)">
+            <rect width="420" height="140" fill="url(#spaceBg)"/>
+            <!-- Astrophage nebula -->
+            <ellipse cx="210" cy="118" rx="230" ry="58" fill="url(#nebCore)"  filter="url(#turb)"/>
+            <ellipse cx="180" cy="125" rx="180" ry="45" fill="#c84b00" opacity="0.18" filter="url(#blur)"/>
+            <ellipse cx="240" cy="130" rx="150" ry="38" fill="#ff6600" opacity="0.12" filter="url(#blur)"/>
+            <ellipse cx="200" cy="122" rx="200" ry="52" fill="url(#nebGreen)" filter="url(#turb)"/>
+            <ellipse cx="260" cy="128" rx="140" ry="40" fill="#00ff66" opacity="0.08" filter="url(#blur)"/>
+            <rect x="0" y="88" width="420" height="52" fill="url(#spaceBg)" opacity="0.6"/>
+            <!-- Stars -->
+            <circle cx="12"  cy="8"  r="0.5" fill="rgba(255,240,200,0.7)"/><circle cx="38"  cy="18" r="0.4" fill="rgba(200,220,255,0.6)"/>
+            <circle cx="65"  cy="5"  r="0.6" fill="rgba(255,240,200,0.8)"/><circle cx="90"  cy="22" r="0.3" fill="rgba(255,255,255,0.5)"/>
+            <circle cx="120" cy="10" r="0.5" fill="rgba(200,220,255,0.7)"/><circle cx="148" cy="30" r="0.4" fill="rgba(255,240,200,0.6)"/>
+            <circle cx="170" cy="7"  r="0.3" fill="rgba(255,255,255,0.5)"/><circle cx="200" cy="18" r="0.5" fill="rgba(200,220,255,0.6)"/>
+            <circle cx="230" cy="6"  r="0.4" fill="rgba(255,240,200,0.7)"/><circle cx="260" cy="25" r="0.3" fill="rgba(255,255,255,0.5)"/>
+            <circle cx="285" cy="12" r="0.6" fill="rgba(255,240,200,0.6)"/><circle cx="310" cy="8"  r="0.4" fill="rgba(200,220,255,0.7)"/>
+            <circle cx="365" cy="14" r="0.5" fill="rgba(255,240,200,0.8)"/><circle cx="395" cy="9"  r="0.4" fill="rgba(200,220,255,0.6)"/>
+            <circle cx="50"  cy="55" r="0.4" fill="rgba(255,255,255,0.4)"/><circle cx="160" cy="65" r="0.4" fill="rgba(255,240,200,0.5)"/>
+            <circle cx="220" cy="72" r="0.3" fill="rgba(255,255,255,0.4)"/><circle cx="330" cy="68" r="0.4" fill="rgba(255,240,200,0.6)"/>
+            <!-- Ryland -->
+            <circle cx="32" cy="38" r="26" fill="url(#sunGrad)" opacity="0.5"/>
+            <circle cx="32" cy="38" r="12" fill="url(#sunGrad)" opacity="0.6"/>
+            <circle cx="32" cy="38" r="5"  fill="#fff8e0" opacity="0.95"/>
+            <ellipse cx="32" cy="38" rx="20" ry="6" fill="none" stroke="rgba(255,210,80,0.15)" stroke-width="1.5"/>
+            <!-- Adrian planet -->
+            <circle cx="350" cy="55" r="62" fill="url(#atmGrad)"/>
+            <circle cx="350" cy="55" r="50" fill="url(#adrianGrad)"/>
+            <ellipse cx="350" cy="38" rx="50" ry="9"  fill="rgba(180,70,20,0.25)"  transform="rotate(-8,350,38)"/>
+            <ellipse cx="350" cy="58" rx="46" ry="7"  fill="rgba(100,30,5,0.20)"   transform="rotate(5,350,58)"/>
+            <ellipse cx="350" cy="72" rx="44" ry="6"  fill="rgba(220,100,40,0.15)" transform="rotate(-3,350,72)"/>
+            <circle cx="350" cy="55" r="50" fill="none" stroke="rgba(30,255,100,0.12)" stroke-width="4"/>
+            <circle cx="350" cy="55" r="50" fill="none" stroke="rgba(240,150,60,0.32)" stroke-width="2.5"/>
+            <!-- Rocky -->
+            <g transform="translate(268,48)">
+              <circle r="7"   fill="none" stroke="rgba(184,132,58,0.55)" stroke-width="0.7"/>
+              <circle r="4.5" fill="none" stroke="rgba(184,132,58,0.40)" stroke-width="0.6"/>
+              <circle r="2"   fill="rgba(255,200,50,0.7)"/>
+              <line x1="0" y1="-9"  x2="0"  y2="-12" stroke="rgba(184,132,58,0.45)" stroke-width="0.6"/>
+              <line x1="9" y1="0"   x2="12" y2="0"   stroke="rgba(184,132,58,0.45)" stroke-width="0.6"/>
+              <line x1="0" y1="9"   x2="0"  y2="12"  stroke="rgba(184,132,58,0.45)" stroke-width="0.6"/>
+              <line x1="-9" y1="0"  x2="-12" y2="0"  stroke="rgba(184,132,58,0.45)" stroke-width="0.6"/>
+            </g>
+            <!-- Hail Mary ship -->
+            <g transform="translate(138,46)" opacity="0.65">
+              <ellipse rx="9" ry="2.5" fill="rgba(200,210,220,0.6)"/>
+              <ellipse rx="4" ry="1.5" cy="-1.5" fill="rgba(180,190,200,0.5)"/>
+              <line x1="-9" y1="0" x2="-15" y2="2"  stroke="rgba(180,190,200,0.4)" stroke-width="0.7"/>
+              <line x1="9"  y1="0" x2="15"  y2="-2" stroke="rgba(180,190,200,0.4)" stroke-width="0.7"/>
+              <circle cx="-10" cy="1" r="1.5" fill="rgba(100,180,255,0.7)"/>
+            </g>
+            <!-- Labels -->
+            <text x="300" y="108" font-family="Georgia,serif" font-style="italic" font-size="8"   fill="rgba(220,130,70,0.6)"  letter-spacing="1.5">Adrian</text>
+            <text x="252" y="66"  font-family="Georgia,serif" font-style="italic" font-size="6.5" fill="rgba(184,150,58,0.55)" letter-spacing="1">Rocky</text>
+            <text x="6"   y="72"  font-family="Georgia,serif" font-style="italic" font-size="6.5" fill="rgba(255,230,140,0.5)" letter-spacing="1">Ryland ★</text>
+            <text x="140" y="136" font-family="Georgia,serif" font-style="italic" font-size="6.5" fill="rgba(80,255,140,0.4)"  letter-spacing="1.5">~ Astrophage ~</text>
           </g>
- 
-          <!-- Hail Mary ship — tiny silhouette between Ryland and Adrian -->
-          <g transform="translate(138,46)" opacity="0.65">
-            <ellipse rx="9" ry="2.5" fill="rgba(200,210,220,0.6)"/>
-            <ellipse rx="4" ry="1.5" cy="-1.5" fill="rgba(180,190,200,0.5)"/>
-            <line x1="-9" y1="0" x2="-15" y2="2" stroke="rgba(180,190,200,0.4)" stroke-width="0.7"/>
-            <line x1="9"  y1="0" x2="15"  y2="-2" stroke="rgba(180,190,200,0.4)" stroke-width="0.7"/>
-            <!-- engine glow -->
-            <circle cx="-10" cy="1" r="1.5" fill="rgba(100,180,255,0.7)"/>
-          </g>
- 
-          <!-- label: Adrian -->
-          <text x="300" y="108" font-family="Georgia,serif" font-style="italic" font-size="8" fill="rgba(220,130,70,0.6)" letter-spacing="1.5">Adrian</text>
-          <!-- label: Rocky -->
-          <text x="252" y="66" font-family="Georgia,serif" font-style="italic" font-size="6.5" fill="rgba(184,150,58,0.55)" letter-spacing="1">Rocky</text>
-          <!-- label: Ryland -->
-          <text x="6" y="72" font-family="Georgia,serif" font-style="italic" font-size="6.5" fill="rgba(255,230,140,0.5)" letter-spacing="1">Ryland ★</text>
-          <!-- Astrophage label -->
-          <text x="140" y="136" font-family="Georgia,serif" font-style="italic" font-size="6.5" fill="rgba(80,255,140,0.4)" letter-spacing="1.5">~ Astrophage ~</text>
-        </g>
-      </svg>
-    </div>
- 
-    <div class="card-body">
-    <span class="orn tl" style="position:absolute;top:10px;left:12px;">✦</span>
-    <span class="orn tr" style="position:absolute;top:10px;right:12px;transform:scaleX(-1);">✦</span>
-    <span class="orn bl" style="position:absolute;bottom:10px;left:12px;transform:scaleY(-1);">✦</span>
-    <span class="orn br" style="position:absolute;bottom:10px;right:12px;transform:scale(-1);">✦</span>
- 
-    <!-- INVITE -->
-    <div id="inviteScreen">
-      <div style="text-align:center;margin-bottom:10px;">
-        <span class="astrophage"></span>
-      </div>
-      <div class="dateline">A Personal Invitation</div>
- 
-      <h1>Will you go on a<br><em>date</em> with me?</h1>
- 
-      <div class="divider"><div class="divider-line"></div><div class="divider-glyph">◈</div><div class="divider-line"></div></div>
- 
-      <p class="salutation">My dearest,</p>
-      <p class="body-text">
-        I have been thinking of you —<br>
-        the way a song stays long after<br>
-        the record stops spinning.<br>
-        Would you spend an evening with me?
-      </p>
- 
-      <div class="divider"><div class="divider-line"></div><div class="divider-glyph">◈</div><div class="divider-line"></div></div>
- 
-      <div class="signature">
-        <div class="sig-line">With all my heart</div>
-        <div class="sig-sub">Your Secret Admirer</div>
+        </svg>
       </div>
  
-      <div class="rsvp-label">— R.S.V.P —</div>
+      <!-- ══ CARD BODY ══ -->
+      <div class="card-body">
+        <span class="orn tl">✦</span>
+        <span class="orn tr">✦</span>
+        <span class="orn bl">✦</span>
+        <span class="orn br">✦</span>
  
-      <button class="btn-yes" id="btnYes" onclick="sayYes()">Yes, of course ♪</button>
- 
-      <div id="rsvpZone">
-        <button class="btn-no" id="btnNo">No, maybe not</button>
-      </div>
-      <div class="no-msg" id="noMsg"></div>
-    </div>
- 
-    <!-- ACCEPTED -->
-    <div class="accepted-screen" id="acceptedScreen">
-      <div class="acc-icon">🎶</div>
-      <div class="acc-title">You said yes!</div>
-      <div class="acc-sub">I am absolutely overjoyed. Now tell me…</div>
-      <div class="divider"><div class="divider-line"></div><div class="divider-glyph">◈</div><div class="divider-line"></div></div>
-      <div class="ideas-label">— Choose our evening —</div>
-      <div class="idea-cards">
-        <div class="idea-card" onclick="choosePlan('wine')">
-          <div class="idea-icon">🍷</div>
-          <div class="idea-title">Classic Wine Date</div>
-          <div class="idea-desc">Candlelight, deep red pours, and an evening that lingers.</div>
+        <!-- INVITE SCREEN -->
+        <div id="inviteScreen">
+          <div style="text-align:center;margin-bottom:10px;"><span class="astrophage"></span></div>
+          <div class="dateline">A Personal Invitation</div>
+          <h1>Will you go on a<br><em>date</em> with me?</h1>
+          <div class="divider"><div class="divider-line"></div><div class="divider-glyph">◈</div><div class="divider-line"></div></div>
+          <p class="salutation">My dearest,</p>
+          <p class="body-text">
+            I have been thinking of you —<br>
+            the way a song stays long after<br>
+            the record stops spinning.<br>
+            Would you spend an evening with me?
+          </p>
+          <div class="divider"><div class="divider-line"></div><div class="divider-glyph">◈</div><div class="divider-line"></div></div>
+          <div class="signature">
+            <div class="sig-line">With all my heart</div>
+            <div class="sig-sub">Your Secret Admirer</div>
+          </div>
+          <div class="rsvp-label">— R.S.V.P —</div>
+          <button class="btn-yes" id="btnYes" onclick="sayYes()">Yes, of course ♪</button>
+          <div id="rsvpZone">
+            <button class="btn-no" id="btnNo">No, maybe not</button>
+          </div>
+          <div class="no-msg" id="noMsg"></div>
         </div>
-        <div class="idea-card" onclick="choosePlan('vinyl')">
-          <div class="idea-icon">🎵</div>
-          <div class="idea-title">Vinyl Date</div>
-          <div class="idea-desc">Warm records, low light, and music felt in the bones.</div>
+ 
+        <!-- ACCEPTED SCREEN -->
+        <div class="accepted-screen" id="acceptedScreen">
+          <div class="acc-icon">🎶</div>
+          <div class="acc-title">You said yes!</div>
+          <div class="acc-sub">I am absolutely overjoyed. Now tell me…</div>
+          <div class="divider"><div class="divider-line"></div><div class="divider-glyph">◈</div><div class="divider-line"></div></div>
+          <div class="ideas-label">— Choose our evening —</div>
+          <div class="idea-cards">
+            <div class="idea-card" onclick="choosePlan('wine')">
+              <div class="idea-icon">🍷</div>
+              <div class="idea-title">Classic Wine Date</div>
+              <div class="idea-desc">Candlelight, deep red pours, and an evening that lingers.</div>
+            </div>
+            <div class="idea-card" onclick="choosePlan('vinyl')">
+              <div class="idea-icon">🎵</div>
+              <div class="idea-title">Vinyl Date</div>
+              <div class="idea-desc">Warm records, low light, and music felt in the bones.</div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
  
-    <!-- CHOSEN -->
-    <div class="chosen-screen" id="chosenScreen">
-      <div class="chosen-icon" id="chosenIcon"></div>
-      <div class="chosen-title" id="chosenTitle"></div>
- 
-      <div class="chosen-msg-block">
-        <span class="chosen-msg-line highlight" id="chosenMsgTop"></span>
-        <span class="chosen-msg-line" id="chosenMsgBody"></span>
-      </div>
- 
-      <div class="location-card">
-        <div class="location-info">
-          <div class="location-label">📍 Venue</div>
-          <div class="location-name" id="chosenVenue"></div>
-          <div class="location-day">Friday — your available time</div>
+        <!-- CHOSEN SCREEN -->
+        <div class="chosen-screen" id="chosenScreen">
+          <div class="chosen-icon"  id="chosenIcon"></div>
+          <div class="chosen-title" id="chosenTitle"></div>
+          <div class="chosen-msg-block">
+            <span class="chosen-msg-line highlight" id="chosenMsgTop"></span>
+            <span class="chosen-msg-line"           id="chosenMsgBody"></span>
+          </div>
+          <div class="location-card">
+            <div class="location-info">
+              <div class="location-label">📍 Venue</div>
+              <div class="location-name" id="chosenVenue"></div>
+              <div class="location-day">Friday — your available time</div>
+            </div>
+            <a class="map-btn" id="chosenMapLink" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+              Open Map
+            </a>
+          </div>
+          <div class="divider"><div class="divider-line"></div><div class="divider-glyph">◈</div><div class="divider-line"></div></div>
+          <div class="stamp">It's a date ✦</div>
         </div>
-        <a class="map-btn" id="chosenMapLink" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
-          Open Map
-        </a>
+ 
+      </div><!-- /card-body -->
+ 
+      <!-- LOCKED SCREEN -->
+      <div class="locked-screen" id="lockedScreen" style="padding:32px 48px 0;">
+        <div class="locked-icon">🔒</div>
+        <div class="locked-title">You've already answered</div>
+        <div class="locked-sub">
+          Your choice has been received.<br>
+          Some answers only need to be given once. ♪
+        </div>
+        <div class="divider" style="margin-top:24px;"><div class="divider-line"></div><div class="divider-glyph">◈</div><div class="divider-line"></div></div>
+        <div class="stamp">It's a date ✦</div>
       </div>
  
-      <div class="divider"><div class="divider-line"></div><div class="divider-glyph">◈</div><div class="divider-line"></div></div>
-      <div class="stamp">It's a date ✦</div>
-    </div><!-- /card-body -->
- 
-    <!-- LOCKED SCREEN -->
-    <div class="locked-screen" id="lockedScreen" style="padding:32px 48px 0;">
-      <div class="locked-icon">🔒</div>
-      <div class="locked-title">You've already answered</div>
-      <div class="locked-sub">
-        Your choice has been received.<br>
-        Some answers only need to be given once. ♪
-      </div>
-      <div class="divider" style="margin-top:24px;"><div class="divider-line"></div><div class="divider-glyph">◈</div><div class="divider-line"></div></div>
-      <div class="stamp">It's a date ✦</div>
-    </div>
- 
-    </div>
-  </div>
+    </div><!-- /card -->
   </div>
 </div>
  
 <script>
   /* STARFIELD */
   (function(){
-    const cv = document.getElementById('starfield');
-    const ctx = cv.getContext('2d');
-    function resize(){ cv.width=window.innerWidth; cv.height=window.innerHeight; drawStars(); }
-    function drawStars(){
+    const cv=document.getElementById('starfield'), ctx=cv.getContext('2d');
+    function resize(){ cv.width=innerWidth; cv.height=innerHeight; draw(); }
+    function draw(){
       ctx.clearRect(0,0,cv.width,cv.height);
-      const rng = (s)=>{ let x=s; return ()=>{ x=Math.sin(x)*10000; return x-Math.floor(x); }; };
-      const r = rng(42);
+      const r=(s=>{let x=s;return()=>{x=Math.sin(x)*10000;return x-Math.floor(x);}})(42);
       for(let i=0;i<260;i++){
-        const x=r()*cv.width, y=r()*cv.height;
-        const sz=r()*1.4+0.2;
-        const alpha=r()*0.55+0.15;
-        const warm = r()>0.7;
-        ctx.beginPath();
-        ctx.arc(x,y,sz,0,Math.PI*2);
-        ctx.fillStyle = warm
-          ? `rgba(255,220,150,${alpha})`
-          : `rgba(200,210,255,${alpha})`;
-        ctx.fill();
+        const x=r()*cv.width,y=r()*cv.height,sz=r()*1.4+0.2,a=r()*0.55+0.15;
+        ctx.beginPath(); ctx.arc(x,y,sz,0,Math.PI*2);
+        ctx.fillStyle=r()>0.7?`rgba(255,220,150,${a})`:`rgba(200,210,255,${a})`; ctx.fill();
       }
-      // faint milky-way streak
-      const grd=ctx.createLinearGradient(cv.width*0.1,cv.height*0.3,cv.width*0.9,cv.height*0.7);
-      grd.addColorStop(0,'transparent');
-      grd.addColorStop(0.5,'rgba(180,160,220,0.04)');
-      grd.addColorStop(1,'transparent');
-      ctx.fillStyle=grd;
-      ctx.fillRect(0,0,cv.width,cv.height);
+      const g=ctx.createLinearGradient(cv.width*.1,cv.height*.3,cv.width*.9,cv.height*.7);
+      g.addColorStop(0,'transparent'); g.addColorStop(.5,'rgba(180,160,220,0.04)'); g.addColorStop(1,'transparent');
+      ctx.fillStyle=g; ctx.fillRect(0,0,cv.width,cv.height);
     }
-    window.addEventListener('resize',resize);
-    resize();
+    addEventListener('resize',resize); resize();
   })();
  
   /* PARTICLES */
-  const syms = ['♪','♫','♬','◉','♩','∿','◎'];
-  const pc = document.getElementById('particles');
-  for (let i = 0; i < 24; i++) {
-    const el = document.createElement('div');
-    el.className = 'particle';
-    el.textContent = syms[Math.floor(Math.random() * syms.length)];
-    el.style.left = Math.random() * 100 + '%';
-    el.style.animationDelay = (Math.random() * 16) + 's';
-    el.style.animationDuration = (10 + Math.random() * 14) + 's';
-    el.style.fontSize = (10 + Math.random() * 11) + 'px';
+  const syms=['♪','♫','♬','◉','♩','∿','◎'], pc=document.getElementById('particles');
+  for(let i=0;i<24;i++){
+    const el=document.createElement('div'); el.className='particle';
+    el.textContent=syms[Math.floor(Math.random()*syms.length)];
+    el.style.left=Math.random()*100+'%';
+    el.style.animationDelay=Math.random()*16+'s';
+    el.style.animationDuration=(10+Math.random()*14)+'s';
+    el.style.fontSize=(10+Math.random()*11)+'px';
     pc.appendChild(el);
   }
  
-  /* ONE-TIME LOCK — check on load */
-  (function() {
-    const saved = localStorage.getItem('dateInviteChoice');
-    if (saved) {
-      document.getElementById('inviteScreen').style.display = 'none';
-      const ls = document.getElementById('lockedScreen');
-      ls.classList.add('show');
+  /* ONE-TIME LOCK */
+  (function(){
+    if(localStorage.getItem('dateInviteChoice')){
+      document.getElementById('inviteScreen').style.display='none';
+      document.getElementById('lockedScreen').classList.add('show');
     }
   })();
  
   /* NO BUTTON */
-  let noCount = 0;
-  const msgs = [
+  let noCount=0;
+  const msgs=[
     "That button doesn't quite work… ♪",
     "It keeps drifting away~",
     "Maybe the music knows something.",
@@ -680,144 +404,86 @@
     "Some things are simply meant to be… ✦",
     "It's very shy. Try the other one."
   ];
- 
-  const btn = document.getElementById('btnNo');
-  let moving = false;
- 
-  function runAway() {
-    if (moving) return;
-    moving = true;
+  const btn=document.getElementById('btnNo');
+  let moving=false;
+  function runAway(){
+    if(moving)return; moving=true;
     noCount++;
-    const msg = document.getElementById('noMsg');
-    msg.textContent = msgs[Math.min(noCount - 1, msgs.length - 1)];
+    const msg=document.getElementById('noMsg');
+    msg.textContent=msgs[Math.min(noCount-1,msgs.length-1)];
     msg.classList.add('show');
- 
-    const zone = document.getElementById('rsvpZone');
-    const bW = btn.offsetWidth, bH = btn.offsetHeight;
-    const zW = zone.offsetWidth,  zH = zone.offsetHeight;
-    const pad = 10;
-    const cx = btn.style.left ? parseFloat(btn.style.left) : (zW - bW) / 2;
-    const cy = btn.style.top  ? parseFloat(btn.style.top)  : (zH - bH) / 2;
- 
-    let nx, ny, t = 0;
-    do {
-      nx = pad + Math.random() * Math.max(0, zW - bW - pad * 2);
-      ny = pad + Math.random() * Math.max(0, zH - bH - pad * 2);
-      t++;
-    } while (t < 30 && Math.hypot(nx - cx, ny - cy) < 80);
- 
-    btn.style.left = nx + 'px';
-    btn.style.top  = ny + 'px';
-    setTimeout(() => { moving = false; }, 360);
+    const zone=document.getElementById('rsvpZone');
+    const bW=btn.offsetWidth,bH=btn.offsetHeight,zW=zone.offsetWidth,zH=zone.offsetHeight,pad=10;
+    const cx=btn.style.left?parseFloat(btn.style.left):(zW-bW)/2;
+    const cy=btn.style.top ?parseFloat(btn.style.top) :(zH-bH)/2;
+    let nx,ny,t=0;
+    do{ nx=pad+Math.random()*Math.max(0,zW-bW-pad*2); ny=pad+Math.random()*Math.max(0,zH-bH-pad*2); t++; }
+    while(t<30&&Math.hypot(nx-cx,ny-cy)<80);
+    btn.style.left=nx+'px'; btn.style.top=ny+'px';
+    setTimeout(()=>{ moving=false; },360);
   }
- 
   btn.addEventListener('mouseenter', runAway);
-  btn.addEventListener('touchstart', e => { e.preventDefault(); runAway(); }, { passive:false });
+  btn.addEventListener('touchstart', e=>{ e.preventDefault(); runAway(); },{ passive:false });
  
   /* YES */
-  function sayYes() {
+  function sayYes(){
     spawnNotes();
-    document.getElementById('inviteScreen').style.display = 'none';
-    btn.style.display = 'none';
-    document.getElementById('noMsg').style.display = 'none';
-    setTimeout(() => { document.getElementById('acceptedScreen').classList.add('show'); }, 280);
+    document.getElementById('inviteScreen').style.display='none';
+    btn.style.display='none';
+    document.getElementById('noMsg').style.display='none';
+    setTimeout(()=>{ document.getElementById('acceptedScreen').classList.add('show'); },280);
   }
  
   /* NOTES BURST */
-  function spawnNotes() {
-    const s = ['♪','♫','♬','◉','♩','∿'];
-    const c = ['#b8843a','#9b3a52','#c97a8e','#d4a85a','#8a7060','#e8c4ce'];
-    for (let i = 0; i < 18; i++) {
-      const n = document.createElement('div');
-      n.textContent = s[Math.floor(Math.random()*s.length)];
-      n.style.cssText = `
-        position:fixed; z-index:9999;
-        font-size:${13+Math.random()*16}px;
-        color:${c[Math.floor(Math.random()*c.length)]};
-        left:${15+Math.random()*70}%;
-        top:${20+Math.random()*55}%;
-        pointer-events:none;
-        font-family:'EB Garamond',serif;
-        animation:noteFly 1.4s ease-out forwards;
-        animation-delay:${Math.random()*0.4}s;
-      `;
-      document.body.appendChild(n);
-      setTimeout(() => n.remove(), 2000);
+  function spawnNotes(){
+    const s=['♪','♫','♬','◉','♩','∿'], c=['#b8843a','#9b3a52','#c97a8e','#d4a85a','#8a7060','#e8c4ce'];
+    for(let i=0;i<18;i++){
+      const n=document.createElement('div');
+      n.textContent=s[Math.floor(Math.random()*s.length)];
+      n.style.cssText=`position:fixed;z-index:9999;font-size:${13+Math.random()*16}px;color:${c[Math.floor(Math.random()*c.length)]};left:${15+Math.random()*70}%;top:${20+Math.random()*55}%;pointer-events:none;font-family:'EB Garamond',serif;animation:noteFly 1.4s ease-out forwards;animation-delay:${Math.random()*.4}s;`;
+      document.body.appendChild(n); setTimeout(()=>n.remove(),2000);
     }
   }
- 
-  const ds = document.createElement('style');
-  ds.textContent = `
-    @keyframes noteFly {
-      0%   { opacity:1; transform:scale(0) translateY(0) rotate(0deg); }
-      50%  { opacity:1; transform:scale(1.4) translateY(-50px) rotate(18deg); }
-      100% { opacity:0; transform:scale(0.6) translateY(-110px) rotate(-12deg); }
-    }
-  `;
+  const ds=document.createElement('style');
+  ds.textContent='@keyframes noteFly{0%{opacity:1;transform:scale(0) translateY(0) rotate(0deg);}50%{opacity:1;transform:scale(1.4) translateY(-50px) rotate(18deg);}100%{opacity:0;transform:scale(0.6) translateY(-110px) rotate(-12deg);}}';
   document.head.appendChild(ds);
  
-  /* ══ EMAILJS NOTIFICATION ══
-     Setup steps (free, 2 min):
-     1. Go to https://www.emailjs.com → Sign up free
-     2. Add Email Service → Gmail → copy YOUR_SERVICE_ID
-     3. Create Email Template with variables: {{choice}}, {{venue}}, {{time}}
-        Copy YOUR_TEMPLATE_ID
-     4. Go to Account → API Keys → copy YOUR_PUBLIC_KEY
-     5. Replace the three placeholders below
-  */
-const EJS_SERVICE  = 'service_o8lh8rb';
-const EJS_TEMPLATE = 'template_3845ct7';
-const EJS_KEY      = 'YxejwbRVXGq64iacd';
+  /* ══ EMAILJS — replace 3 values below with your own ══ */
+  const EJS_SERVICE  = 'service_o8lh8rb';
+  const EJS_TEMPLATE = 'template_3845ct7';
+  const EJS_KEY      = 'YxejwbRVXGq64iacd';
+  try { emailjs.init({ publicKey: EJS_KEY }); } catch(e){}
  
-  try { emailjs.init({ publicKey: EJS_KEY }); } catch(e) {}
- 
-  function sendNotification(choice, venue) {
-    if (!EJS_KEY || !EJS_SERVICE || !EJS_TEMPLATE) return; // keys not set
-    const params = {
-      choice:  choice === 'wine' ? 'Classic Wine Date 🍷' : 'Vinyl Date 🎵',
-      venue:   venue,
-      time:    new Date().toLocaleString('en-US', { dateStyle:'full', timeStyle:'short' })
-    };
+  function sendNotification(choice, venue){
+    if(EJS_KEY==='YOUR_PUBLIC_KEY') return;
     try {
-      emailjs.send(EJS_SERVICE, EJS_TEMPLATE, params)
-        .then(() => console.log('✅ Notification sent'))
-        .catch(e => console.warn('EmailJS error:', e));
-    } catch(e) {}
+      emailjs.send(EJS_SERVICE, EJS_TEMPLATE, {
+        name:    choice==='wine' ? 'Classic Wine Date 🍷' : 'Vinyl Date 🎵',
+        message: 'Venue: ' + venue,
+        time:    new Date().toLocaleString('en-US',{ dateStyle:'full', timeStyle:'short' })
+      }).then(()=>console.log('✅ sent')).catch(e=>console.warn(e));
+    } catch(e){}
   }
  
   /* PLANS */
   const plans = {
-    wine: {
-      icon: '🍷',
-      title: 'Classic Wine Date',
-      msgTop: 'Loved your choice for selecting the Classic Wine Date.',
-      msgBody: "I'd like to appoint a date on Friday. See you on your available time on that day.",
-      venue: 'Silkroad Restaurant',
-      mapUrl: 'https://maps.google.com/?q=Silkroad+Restaurant+Ulaanbaatar'
-    },
-    vinyl: {
-      icon: '🎵',
-      title: 'Vinyl Date',
-      msgTop: 'Loved your choice for selecting the Vinyl Date.',
-      msgBody: "I'd like to appoint a date on Friday. See you on your available time on that day.",
-      venue: 'Mushroom Vinyl Music Restaurant',
-      mapUrl: 'https://maps.google.com/?q=Mushroom+Vinyl+Music+Restaurant+Ulaanbaatar'
-    }
+    wine:  { icon:'🍷', title:'Classic Wine Date',  msgTop:'Loved your choice for selecting the Classic Wine Date.', msgBody:"I'd like to appoint a date on Friday. See you on your available time on that day.", venue:'Silkroad Restaurant',               mapUrl:'https://maps.google.com/?q=Silkroad+Restaurant+Ulaanbaatar' },
+    vinyl: { icon:'🎵', title:'Vinyl Date',          msgTop:'Loved your choice for selecting the Vinyl Date.',        msgBody:"I'd like to appoint a date on Friday. See you on your available time on that day.", venue:'Mushroom Vinyl Music Restaurant', mapUrl:'https://maps.google.com/?q=Mushroom+Vinyl+Music+Restaurant+Ulaanbaatar' }
   };
  
-  function choosePlan(type) {
-    const p = plans[type];
-    document.getElementById('chosenIcon').textContent = p.icon;
-    document.getElementById('chosenTitle').textContent = p.title;
-    document.getElementById('chosenMsgTop').textContent = p.msgTop;
-    document.getElementById('chosenMsgBody').textContent = p.msgBody;
-    document.getElementById('chosenVenue').textContent = p.venue;
-    document.getElementById('chosenMapLink').href = p.mapUrl;
+  function choosePlan(type){
+    const p=plans[type];
+    document.getElementById('chosenIcon').textContent=p.icon;
+    document.getElementById('chosenTitle').textContent=p.title;
+    document.getElementById('chosenMsgTop').textContent=p.msgTop;
+    document.getElementById('chosenMsgBody').textContent=p.msgBody;
+    document.getElementById('chosenVenue').textContent=p.venue;
+    document.getElementById('chosenMapLink').href=p.mapUrl;
     document.getElementById('acceptedScreen').classList.remove('show');
-    document.getElementById('acceptedScreen').style.display = 'none';
-    localStorage.setItem('dateInviteChoice', type);
-    sendNotification(type, p.venue);
-    setTimeout(() => { document.getElementById('chosenScreen').classList.add('show'); spawnNotes(); }, 100);
+    document.getElementById('acceptedScreen').style.display='none';
+    localStorage.setItem('dateInviteChoice',type);
+    sendNotification(type,p.venue);
+    setTimeout(()=>{ document.getElementById('chosenScreen').classList.add('show'); spawnNotes(); },100);
   }
 </script>
 </body>
